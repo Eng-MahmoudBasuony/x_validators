@@ -1,21 +1,21 @@
+// Importing the main x_validators library
+import '../../core/utils/language_utils.dart';
 import '../../x_validators.dart';
 
-const _rtlLocales = <String>[
-  'ar', // Arabic
-  'fa', // Farsi
-  'he', // Hebrew
-  'ps', // Pashto
-  'ur', // Urdu
-];
 
+// A validation rule to check if a language code is LTR (Left-to-Right)
 class IsLtrLanguage extends TextXValidationRule {
-  IsLtrLanguage([String? error]) : super(error);
+  // Constructor to initialize the rule with an optional error message
+  IsLtrLanguage([super.error]);
 
+  // Override isValid method to implement the LTR language validation
   @override
-  bool isValid(String input) => isLtrLanguage(input);
+  bool isValid(String input) => LanguageUtils.isLtrLanguage(input);
+
+  // Override toString method to provide a description for the rule
   @override
   String toString() => 'validation.is_not_ltr_language_code';
+
 }
 
-bool isLtrLanguage(String languageCode) =>
-    !_rtlLocales.contains(languageCode.toLowerCase());
+

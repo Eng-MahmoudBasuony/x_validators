@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsArabicChars extends TextXValidationRule {
-  IsArabicChars([String? error]) : super(error);
+  IsArabicChars([super.error]);
 
   @override
   bool isValid(String input) => isArabicChars(input);

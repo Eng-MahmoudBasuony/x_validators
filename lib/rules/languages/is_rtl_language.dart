@@ -1,21 +1,21 @@
+// Importing the main x_validators library
+import '../../core/utils/language_utils.dart';
 import '../../x_validators.dart';
 
-const _rtlLocales = <String>[
-  'ar', // Arabic
-  'fa', // Farsi
-  'he', // Hebrew
-  'ps', // Pashto
-  'ur', // Urdu
-];
 
+
+// A validation rule to check if a language code is RTL
 class IsRTLLanguage extends TextXValidationRule {
-  IsRTLLanguage([String? error]) : super(error);
+  // Constructor to initialize the rule with an optional error message
+  IsRTLLanguage([super.error]);
 
+  // Override isValid method to implement the RTL language validation
   @override
-  bool isValid(String input) => isRtlLanguage(input);
+  bool isValid(String input) => LanguageUtils.isRtlLanguage(input);
+
+  // Override toString method to provide a description for the rule
   @override
   String toString() => 'validation.is_not_rtl_language_code';
 }
 
-bool isRtlLanguage(String languageCode) =>
-    _rtlLocales.contains(languageCode.toLowerCase());
+
