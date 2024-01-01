@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsDateAfter extends TextValidationRule {
+class IsDateAfter extends TextXValidationRule {
   final DateTime date;
 
   IsDateAfter(this.date, [String? error]) : super(error);

@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsDate extends TextValidationRule {
+class IsDate extends TextXValidationRule {
   const IsDate([String? error]) : super(error);
 
   @override

@@ -8,7 +8,7 @@ const _rtlLocales = <String>[
   'ur', // Urdu
 ];
 
-class IsLtrLanguage extends TextValidationRule {
+class IsLtrLanguage extends TextXValidationRule {
   IsLtrLanguage([String? error]) : super(error);
 
   @override

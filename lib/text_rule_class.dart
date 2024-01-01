@@ -5,10 +5,10 @@
 ///   `nationsKey` return key to use with nations
 ///
 
-abstract class TextValidationRule {
+abstract class TextXValidationRule {
   ///  message to show case validations fails
 
-  const TextValidationRule(this.error);
+  const TextXValidationRule(this.error);
 
   ///  return a bool Either valid or NOT
   bool isValid(String input);

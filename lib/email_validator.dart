@@ -8,7 +8,7 @@ enum SubdomainType { None, Alphabetic, Numeric, AlphaNumeric }
 ///The EmailValidator entry point
 ///
 /// To use the EmailValidator class, call EmailValidator.methodName
-class EmailValidator {
+class EmailXValidator {
   static int _index = 0;
 
   static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";

@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class MaxValue extends TextValidationRule {
+class MaxValue extends TextXValidationRule {
   final num max;
 
   MaxValue(this.max, [String? error]) : super(error);

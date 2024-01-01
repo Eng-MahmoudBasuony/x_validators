@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if the input characters length is bigger than the min field
 
-class MinLength extends TextValidationRule {
+class MinLength extends TextXValidationRule {
   final int min;
 
   MinLength(this.min, [String? error]) : super(error);

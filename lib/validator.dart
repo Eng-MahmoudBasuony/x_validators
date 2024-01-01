@@ -7,10 +7,10 @@ typedef OnFailureCallBack = void Function(
   String? input,
 
   /// the rules for this failed
-  List<TextValidationRule> rules,
+  List<TextXValidationRule> rules,
 
   ///
-  TextValidationRule failedRule,
+  TextXValidationRule failedRule,
 );
 
 /// ? build and return `String Function(String value)`
@@ -24,7 +24,7 @@ typedef OnFailureCallBack = void Function(
 /// but if the validations fails and the value is not
 /// null will return the first fail error message
 String? Function(String?) xValidator(
-  List<TextValidationRule> rules, {
+  List<TextXValidationRule> rules, {
   OnFailureCallBack? onFail,
   bool useNations = true,
 }) {
@@ -55,7 +55,7 @@ String? Function(String?) xValidator(
       ///  error for the entire validation process
       msg = rule.isValid(input)
           ? null
-          : (rule.error ?? ValidatorsLocalization.translate(rule));
+          : (rule.error ?? XValidatorsLocalization.translate(rule));
 
       /// if the failure message `msg` has value on it
       /// that means some rule has failed

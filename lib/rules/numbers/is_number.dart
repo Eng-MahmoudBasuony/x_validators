@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// checks if the input is a valid `integer`
-class IsNumber extends TextValidationRule {
+class IsNumber extends TextXValidationRule {
   IsNumber([String? error]) : super(error);
 
   @override

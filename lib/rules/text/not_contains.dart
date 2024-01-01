@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if input does not contain the provided value;
 
-class NotContains extends TextValidationRule {
+class NotContains extends TextXValidationRule {
   final String value;
 
   NotContains(this.value, [String? error]) : super(error);

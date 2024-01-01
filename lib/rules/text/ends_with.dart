@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class EndsWith extends TextValidationRule {
+class EndsWith extends TextXValidationRule {
   final String end;
 
   EndsWith(this.end, [String? error]) : super(error);

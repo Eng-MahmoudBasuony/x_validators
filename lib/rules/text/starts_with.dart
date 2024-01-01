@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class StartsWith extends TextValidationRule {
+class StartsWith extends TextXValidationRule {
   final Pattern pattern;
 
   StartsWith(this.pattern, [String? error]) : super(error);

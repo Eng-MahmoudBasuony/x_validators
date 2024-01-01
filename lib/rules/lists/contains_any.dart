@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// check if the value contain at lest one of String form the provided list
 
-class ContainsAny extends TextValidationRule {
+class ContainsAny extends TextXValidationRule {
   final List<String> value;
   bool? caseSensitive;
   ContainsAny(this.value, [String? error]) : super(error);

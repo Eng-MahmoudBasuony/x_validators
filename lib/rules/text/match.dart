@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// checks if the input is match other string
-class Match extends TextValidationRule {
+class Match extends TextXValidationRule {
   final String other;
   final bool caseSensitive;
 

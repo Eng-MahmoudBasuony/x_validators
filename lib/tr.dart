@@ -5,17 +5,17 @@ import 'x_validators.dart';
 
 // ignore: avoid_classes_with_only_static_members
 
-abstract class ValidatorsLocalization {
-  static final _map = <String, String Function(TextValidationRule)>{};
+abstract class XValidatorsLocalization {
+  static final _map = <String, String Function(TextXValidationRule)>{};
   static String translate(
-    TextValidationRule rule,
+    TextXValidationRule rule,
   ) =>
       _map[rule.runtimeType.toString()] == null
           ? rule.toString()
           : _map[rule.runtimeType.toString()]!(rule);
 
-  static void on<T extends TextValidationRule>(
-    String Function(TextValidationRule) func,
+  static void on<T extends TextXValidationRule>(
+    String Function(TextXValidationRule) func,
   ) =>
       _map[T.toString()] = func;
 }

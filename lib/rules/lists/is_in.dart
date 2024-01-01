@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// checks if the input `is in` provided List;
-class IsIn extends TextValidationRule {
+class IsIn extends TextXValidationRule {
   final List<String> list;
 
   IsIn(this.list, [String? error]) : super(error);

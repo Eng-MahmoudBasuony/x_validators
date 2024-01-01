@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// check if the value does not contain any item from the provided list
 
-class NotContainsAny extends TextValidationRule {
+class NotContainsAny extends TextXValidationRule {
   final List<String> value;
 
   NotContainsAny(

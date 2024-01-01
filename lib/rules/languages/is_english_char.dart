@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsEnglishChars extends TextValidationRule {
+class IsEnglishChars extends TextXValidationRule {
   IsEnglishChars([String? error]) : super(error);
 
   @override

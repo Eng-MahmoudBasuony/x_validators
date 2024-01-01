@@ -3,7 +3,7 @@ import '../../x_validators.dart';
 /// checks if the input is a valid `date` to parse by
 ///  `DateTime.fromMillisecondsSinceEpoch` factory
 
-class IsDateMillis extends TextValidationRule {
+class IsDateMillis extends TextXValidationRule {
   final bool isUtc;
 
   /// * [isUtc] - if `true` the `DateTime` will be in UTC timezone,

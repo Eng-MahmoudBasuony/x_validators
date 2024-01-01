@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsYoutubeUrl extends TextValidationRule {
+class IsYoutubeUrl extends TextXValidationRule {
   IsYoutubeUrl([String? error]) : super(error);
 
   @override

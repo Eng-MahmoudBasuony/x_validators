@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// checks if the input is a valid `port`
-class IsPort extends TextValidationRule {
+class IsPort extends TextXValidationRule {
   const IsPort([String? error]) : super(error);
 
   @override

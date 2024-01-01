@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsUrl extends TextValidationRule {
+class IsUrl extends TextXValidationRule {
   IsUrl([String? error]) : super(error);
 
   @override

@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// checks if the input is a valid `email` address
-class IsEmail extends TextValidationRule {
+class IsEmail extends TextXValidationRule {
   const IsEmail([String? error]) : super(error);
 
   @override
@@ -11,4 +11,4 @@ class IsEmail extends TextValidationRule {
 }
 
 /// checks if the value can be well formatted email address
-bool isEmail(String? email) => EmailValidator.validate(email ?? '');
+bool isEmail(String? email) => EmailXValidator.validate(email ?? '');

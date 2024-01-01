@@ -1,6 +1,6 @@
 import '../../text_rule_class.dart';
 
-class IsNumbersOnly extends TextValidationRule {
+class IsNumbersOnly extends TextXValidationRule {
   IsNumbersOnly([String? error]) : super(error);
 
   @override

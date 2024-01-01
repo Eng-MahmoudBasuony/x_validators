@@ -4,7 +4,7 @@
 /// wont be bad to have both
 import '../../x_validators.dart';
 
-class IsRequired extends TextValidationRule {
+class IsRequired extends TextXValidationRule {
   IsRequired([String? error]) : super(error);
 
   @override

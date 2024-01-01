@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class MinValue extends TextValidationRule {
+class MinValue extends TextXValidationRule {
   final num min;
 
   MinValue(this.min, [String? error]) : super(error);

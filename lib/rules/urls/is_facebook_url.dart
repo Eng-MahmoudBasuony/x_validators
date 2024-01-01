@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-class IsFacebookUrl extends TextValidationRule {
+class IsFacebookUrl extends TextXValidationRule {
   IsFacebookUrl([String? error]) : super(error);
 
   @override

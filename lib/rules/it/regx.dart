@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 /// allow using a regular expression as validation rule
-class RegExpRule extends TextValidationRule {
+class RegExpRule extends TextXValidationRule {
   final RegExp regX;
   const RegExpRule(this.regX, [String? error]) : super(error);
 
