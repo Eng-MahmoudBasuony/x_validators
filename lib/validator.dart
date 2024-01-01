@@ -1,4 +1,4 @@
-import 'package:x_validators/src/tr.dart';
+import 'package:x_validators/tr.dart';
 
 import 'x_validators.dart';
 

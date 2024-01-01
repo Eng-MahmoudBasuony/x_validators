@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:x_validators/src/x_validators.dart';
+import 'package:x_validators/x_validators.dart';
 
 Future<void> main() async {
   runApp(
