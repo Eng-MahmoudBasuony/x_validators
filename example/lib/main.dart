@@ -49,14 +49,14 @@ class HomePage extends StatelessWidget {
             children: [
               TextFormField(
                 decoration: const InputDecoration(labelText: 'IsRequired'),
-                validator: qValidator([
+                validator: xValidator([
                   // if textFeild trimmed value lenght > 0 it will pass
                   IsRequired(),
                 ]),
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'IsOptional'),
-                validator: qValidator([
+                validator: xValidator([
                   // if the textField contains value the rest of the validators
                   // will run else it will pass alidation with checking them
                   IsOptional(),
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'IsRequired AND IsEmail'),
-                validator: qValidator([
+                validator: xValidator([
                   IsRequired(),
 
                   /// the input value must be a valid (`well formatted`)
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'MinLenght AND IsEmail'),
-                validator: qValidator([
+                validator: xValidator([
                   IsRequired(),
 
                   /// the input min length must be >= 5
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'IsIn AND IsNotIn'),
-                validator: qValidator([
+                validator: xValidator([
                   IsRequired(),
                   IsIn(['white', 'black', 'gray']),
                   IsNotIn(['red', 'blue', 'orange']),

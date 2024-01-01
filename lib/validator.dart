@@ -23,7 +23,7 @@ typedef OnFailureCallBack = void Function(
 ///  fails and the value is null there will be no error
 /// but if the validations fails and the value is not
 /// null will return the first fail error message
-String? Function(String?) qValidator(
+String? Function(String?) xValidator(
   List<TextValidationRule> rules, {
   OnFailureCallBack? onFail,
   bool useNations = true,
