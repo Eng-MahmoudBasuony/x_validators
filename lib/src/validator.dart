@@ -1,3 +1,5 @@
+import 'package:x_validators/src/tr.dart';
+
 import 'x_validators.dart';
 
 typedef OnFailureCallBack = void Function(

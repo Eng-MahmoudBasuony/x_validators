@@ -1,6 +1,14 @@
 library x_validators;
 
-export '../src/rules/index.dart';
-export '../src/tr.dart';
-export 'email_validator.dart';
-export 'text_rule_class.dart';
+
+/// * rules
+export 'package:x_validators/src/rules/index.dart';
+
+/// `abstract` `class` to implement your own  rule
+export 'package:x_validators/src/text_rule_class.dart';
+
+/// `qValidator` function
+export 'package:x_validators/src/validator.dart';
+
+
+export 'package:x_validators/src/email_validator.dart';
