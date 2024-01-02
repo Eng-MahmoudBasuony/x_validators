@@ -29,6 +29,7 @@ String? Function(String?) xValidator(
   bool useNations = true,
 }) {
   return (String? input) {
+    // 1
     if (input == null) return null;
 
     /// if the validator loop has any `IsOptional` Rule this will make

@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsIpAddress extends TextXValidationRule {
-  const IsIpAddress([String? error]) : super(error);
+  const IsIpAddress([super.error]);
 
   @override
   bool isValid(String input) => isIpAddress(input);
