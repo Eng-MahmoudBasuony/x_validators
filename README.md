@@ -5,13 +5,17 @@
 
 X Validators is a versatile Flutter plugin designed to simplify input validation for form fields. This plugin offers a set of validators that developers can seamlessly integrate into their Flutter applications, ensuring robust data validation and user-friendly experiences.
   
- # Usage
+ ## 🖥️ Installation
  
-First, add `x_validators` as a dependency in your pubspec.yaml file.
+Add the following to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  x_validators: ^1.0.1
+  flrx_validator: ^0.6.0
 ```
 
 Don't forget to `flutter pub get`.
+
+## License
+
+Please see [**LICENSE**](https://github.com/Eng-MahmoudBasuony/x_validators/blob/main/LICENSE).
