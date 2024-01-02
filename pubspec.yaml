@@ -1,6 +1,6 @@
 name: x_validators
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: X Validators is a library that simplifies data validation in your applications.
+version: 1.0.1
 homepage: https://github.com/Eng-MahmoudBasuony/x_validators
 repository: https://github.com/Eng-MahmoudBasuony/x_validators
 
