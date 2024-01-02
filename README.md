@@ -11,7 +11,7 @@ Add the following to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  flrx_validator: ^0.6.0
+   x_validators: ^1.0.1
 ```
 
 Don't forget to `flutter pub get`.
