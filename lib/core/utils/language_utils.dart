@@ -15,5 +15,4 @@ class LanguageUtils {
   // Function to check if a given language code is LTR
   static bool isLtrLanguage(String languageCode) =>
       !_rtlLocales.contains(languageCode.toLowerCase());
-
 }

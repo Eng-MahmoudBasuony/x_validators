@@ -2,7 +2,6 @@
 import '../../core/utils/language_utils.dart';
 import '../../x_validators.dart';
 
-
 // A validation rule to check if a language code is LTR (Left-to-Right)
 class IsLtrLanguage extends TextXValidationRule {
   // Constructor to initialize the rule with an optional error message
@@ -15,7 +14,4 @@ class IsLtrLanguage extends TextXValidationRule {
   // Override toString method to provide a description for the rule
   @override
   String toString() => 'validation.is_not_ltr_language_code';
-
 }
-
-
