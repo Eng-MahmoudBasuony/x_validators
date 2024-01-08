@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:x_validators/x_validators.dart';
 
@@ -50,7 +52,6 @@ class HomePage extends StatelessWidget {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'IsRequired'),
                 validator: xValidator([
-                  // if textFeild trimmed value lenght > 0 it will pass
                   IsRequired(),
                 ]),
               ),
@@ -93,11 +94,32 @@ class HomePage extends StatelessWidget {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'IsIn AND IsNotIn'),
+                validator: xValidator(
+                  [
+                    IsRequired(),
+                    IsIn(['white', 'black', 'gray']),
+                    IsNotIn(['red', 'blue', 'orange']),
+                  ],
+                ),
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'IsRequired'),
                 validator: xValidator([
-                  IsRequired(),
-                  IsIn(['white', 'black', 'gray']),
-                  IsNotIn(['red', 'blue', 'orange']),
-                ]),
+                  // Ensures that the input is not empty with a custom error message.
+                  IsRequired("Field cannot be empty"),
+
+                  // Ensures that the input has a minimum length of 3 characters.
+                  MinLength(3, "Field must be at least 3 characters"),
+
+                  // Ensures that the input does not exceed a maximum length of 20 characters.
+                  MaxLength(20, "Field cannot exceed 20 characters"),
+                ], onFailureCallBack: (String? input,
+                    List<TextXValidationRule> rules,
+                    TextXValidationRule failedRule) {
+                  // Logs information about the failed validation for further analysis.
+                  log("###### Validation failed for input #### : $input");
+                  log("#### Failed rule #### : $failedRule");
+                }),
               ),
             ],
           ),
