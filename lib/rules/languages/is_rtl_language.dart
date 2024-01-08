@@ -1,5 +1,3 @@
-// Importing the main x_validators library
-import '../../core/utils/language_utils.dart';
 import '../../x_validators.dart';
 
 // A validation rule to check if a language code is RTL

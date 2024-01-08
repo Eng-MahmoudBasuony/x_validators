@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if the input is a secure `url`
 class IsSecureUrl extends TextXValidationRule {
-  const IsSecureUrl([String? error]) : super(error);
+  const IsSecureUrl([super.error]);
 
   @override
   bool isValid(String input) => isSecureUrl(input);

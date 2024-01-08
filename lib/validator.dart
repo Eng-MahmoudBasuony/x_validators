@@ -25,12 +25,11 @@ typedef OnFailureCallBack = void Function(
 /// null will return the first fail error message
 String? Function(String?) xValidator(
   List<TextXValidationRule> rules, {
-  OnFailureCallBack? onFail,
-  bool useNations = true,
+  OnFailureCallBack? onFailureCallBack,
 }) {
   return (String? input) {
-    // 1
-    if (input == null) return null;
+    //if input is Empty return null (no thing)
+    if (input == null || input.isEmpty) return null;
 
     /// if the validator loop has any `IsOptional` Rule this will make
     /// this variables = `true`;
@@ -50,7 +49,7 @@ String? Function(String?) xValidator(
       if (rule is IsOptional) isOptional = true;
 
       /// * call the validate function and
-      /// if it return null then the will be no error;
+      /// if it return null then the will be no error ;
       /// else ir will return the failure message
       /// which will be return as the validation
       ///  error for the entire validation process
@@ -63,7 +62,7 @@ String? Function(String?) xValidator(
       /// and we return only the first failure
       /// so there is no reason to continue validation the remain rules
       if (msg != null) {
-        onFail?.call(input, rules, rule);
+        onFailureCallBack?.call(input, rules, rule);
         break;
       }
     }

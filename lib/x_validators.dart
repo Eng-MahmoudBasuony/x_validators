@@ -8,5 +8,7 @@ export 'package:x_validators/rules/index.dart';
 /// `abstract` `class` to implement your own  rule
 export 'package:x_validators/text_rule_class.dart';
 
-/// `qValidator` function
+/// `xValidator` function
 export 'package:x_validators/validator.dart';
+
+export '../../core/utils/language_utils.dart';

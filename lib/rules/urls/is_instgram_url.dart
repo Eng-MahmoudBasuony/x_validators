@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsInstagramUrl extends TextXValidationRule {
-  IsInstagramUrl([String? error]) : super(error);
+  IsInstagramUrl([super.error]);
 
   @override
   bool isValid(String input) => isInstgramUrlValid(input);

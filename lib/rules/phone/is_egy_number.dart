@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsEgyptianPhone extends TextXValidationRule {
-  IsEgyptianPhone([String? error]) : super(error);
+  IsEgyptianPhone([super.error]);
 
   @override
   bool isValid(String input) => isEgyptianNumber(input);

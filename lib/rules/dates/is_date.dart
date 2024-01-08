@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsDate extends TextXValidationRule {
-  const IsDate([String? error]) : super(error);
+  const IsDate([super.error]);
 
   @override
   bool isValid(String input) => isDate(input);

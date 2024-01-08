@@ -1,7 +1,3 @@
-
-// checks if the input is not empty string
-// IsRequired is more convenient still
-// wont be bad to have both
 import '../../x_validators.dart';
 
 class IsRequired extends TextXValidationRule {

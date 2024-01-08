@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class ISKsaPhone extends TextXValidationRule {
-  ISKsaPhone([String? error]) : super(error);
+  ISKsaPhone([super.error]);
 
   @override
   bool isValid(String input) => isKsaPhone(input);

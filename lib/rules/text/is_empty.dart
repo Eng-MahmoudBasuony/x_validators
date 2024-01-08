@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsEmpty extends TextXValidationRule {
-  IsEmpty([String? error]) : super(error);
+  IsEmpty([super.error]);
 
   @override
   bool isValid(String input) => isEmpty(input);
