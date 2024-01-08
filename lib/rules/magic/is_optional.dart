@@ -4,7 +4,7 @@ import '../../x_validators.dart';
 /// * if the input is null and fails any role
 /// * with instance of this class the qValidator will ignore the field rule
 class IsOptional extends TextXValidationRule {
-  IsOptional([String? error]) : super(error);
+  IsOptional([super.error]);
 
   @override
   bool isValid(String input) => true;

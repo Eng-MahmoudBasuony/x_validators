@@ -1,7 +1,7 @@
 import '../../x_validators.dart';
 
 class IsBool extends TextXValidationRule {
-  const IsBool([String? error]) : super(error);
+  const IsBool([super.error]);
 
   @override
   bool isValid(String input) => isBool(input);

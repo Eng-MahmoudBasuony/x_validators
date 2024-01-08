@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if the input is a valid `email` address
 class IsEmail extends TextXValidationRule {
-  const IsEmail([String? error]) : super(error);
+  const IsEmail([super.error]);
 
   @override
   bool isValid(String input) => isEmail(input);

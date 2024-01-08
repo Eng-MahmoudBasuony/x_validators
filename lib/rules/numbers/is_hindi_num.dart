@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if the input is a valid `integer`
 class IsHindiNum extends TextXValidationRule {
-  IsHindiNum([String? error]) : super(error);
+  IsHindiNum([super.error]);
 
   @override
   bool isValid(String input) => isHindiNum(input);

@@ -2,7 +2,7 @@ import '../../x_validators.dart';
 
 /// checks if the input is a valid `integer`
 class IsArabicNum extends TextXValidationRule {
-  IsArabicNum([String? error]) : super(error);
+  IsArabicNum([super.error]);
 
   @override
   bool isValid(String input) => isArabicNum(input);
