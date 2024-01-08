@@ -90,6 +90,10 @@ TextFormField(
   }),
 ),
 ```
+##### Explanation:
+The first example demonstrates basic usage of IsRequired validation rule. It ensures that the input is not empty.
+The second example uses multiple rules (IsRequired, MinLength, MaxLength) for more complex validation. It also includes an 
+onFailureCallBack to handle validation failures. If any rule fails, the callback is triggered, logging the input and the failed rule for further analysis.
 
 
 ## License
