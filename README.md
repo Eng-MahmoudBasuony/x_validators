@@ -54,6 +54,43 @@ Don't forget to `flutter pub get`.
 |`IsEgyptianPhone()`| Verifies if the input is a valid Egyptian phone number. |
 |`ISKsaPhone()`| Verifies if the input is a valid Saudi Arabian phone number. |
 
+## How to Use
+
+#### 📚Basic use
+  ##### Demonstrates basic usage of IsRequired validation rule to ensure that the input is not empty.
+```Dart
+  TextFormField(
+                decoration: const InputDecoration(labelText: 'IsRequired'),
+                validator: xValidator([
+                 
+                  IsRequired(),
+                ]),
+              ),
+```
+
+#### 📚onFailureCallBack 
+  ##### Illustrates more complex validation with multiple rules (IsRequired, MinLength, MaxLength).
+  ##### The onFailureCallBack is triggered for any rule failure, logging the input and the failed rule for analysis.
+```Dart
+TextFormField(
+  decoration: const InputDecoration(labelText: 'IsRequired'),
+  validator: xValidator([
+    // Ensures that the input is not empty with a custom error message.
+    IsRequired("Field cannot be empty"),
+
+    // Ensures that the input has a minimum length of 3 characters.
+    MinLength(3, "Field must be at least 3 characters"),
+
+    // Ensures that the input does not exceed a maximum length of 20 characters.
+    MaxLength(20, "Field cannot exceed 20 characters"),
+  ], onFailureCallBack: (String? input, List<TextXValidationRule> rules, TextXValidationRule failedRule) {
+    // Logs information about the failed validation for further analysis.
+    log("###### Validation failed for input #### : $input");
+    log("#### Failed rule #### : $failedRule");
+  }),
+),
+```
+
 
 ## License
 
