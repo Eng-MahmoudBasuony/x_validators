@@ -25,5 +25,4 @@ Please see [**LICENSE**](https://github.com/Eng-MahmoudBasuony/x_validators/blob
 
 
 ## 👨🏻‍💻 Authors
-
 - [@Eng-MahmoudBasuony](https://Eng-MahmoudBasuony)
