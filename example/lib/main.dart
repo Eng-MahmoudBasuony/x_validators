@@ -113,11 +113,11 @@ class HomePage extends StatelessWidget {
 
                   // Ensures that the input does not exceed a maximum length of 20 characters.
                   MaxLength(20, "Field cannot exceed 20 characters"),
-                ], onFailureCallBack: (String? input,
+                ], onFailureCallBack: (String? fieldInput,
                     List<TextXValidationRule> rules,
                     TextXValidationRule failedRule) {
                   // Logs information about the failed validation for further analysis.
-                  log("###### Validation failed for input #### : $input");
+                  log("###### Validation failed for input #### : $fieldInput");
                   log("::::::: error  ${failedRule.error} ::::::::");
 
                   for (var element in rules) {
