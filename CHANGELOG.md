@@ -14,3 +14,8 @@
 ## [1.0.3]-[8-1-2024] Update README
 
 - fix readme
+
+## [1.0.4]-[8-1-2024] Update README
+
+- refactor:♻️ 🗑️ Improve code readability
+- docs:📝 Update README

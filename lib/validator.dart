@@ -4,7 +4,7 @@ import 'x_validators.dart';
 
 typedef OnFailureCallBack = void Function(
   /// the text field content
-  String? input,
+  String? fieldInput,
 
   /// the rules for this failed
   List<TextXValidationRule> rules,
