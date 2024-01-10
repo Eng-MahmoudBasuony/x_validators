@@ -86,6 +86,14 @@ Don't forget to `flutter pub get`.
 | `IsDate()` | Checks if the input is a valid date format.      |
 | `IsDateMillis()` | Checks if the input is a valid date format for milliseconds since epoch.      |
 
+| Rules for `languages`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsArabicChars()` | Checks if the input consists of Arabic characters.      |
+| `IsEnglishChars()` | Checks if the input consists of English characters.      |
+| `IsLtrLanguage()` | Checks if the language code represents an LTR language.      |
+| `IsArabicChars()` | Checks if the input consists of Arabic characters.      |
+| `IsNumbersOnly()` | Checks if the input consists of numbers only.      |
+| `IsRTLLanguage()` | Checks if the language code represents an RTL language.      |
 
 ## How to Use
 
