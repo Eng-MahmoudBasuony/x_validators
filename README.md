@@ -68,13 +68,23 @@ Don't forget to `flutter pub get`.
 | `IsPort()`      | Verifies if the input is a valid port number. |
 | `RegExpRule()`      | Allows using a regular expression as a validation rule. |
 
-| Rules for `It`   | Description                                                  |
+
+| Rules for `lists`   | Description                                                  |
 |---------------------|--------------------------------------------------------------|
-| `IsEmail()` | Verifies if the input is a valid email address.      |
-| `IsBool()`      | Verifies if the input is a valid boolean value. |
-| `IsIpAddress()`      | Verifies if the input is a valid IP address. |
-| `IsPort()`      | Verifies if the input is a valid port number. |
-| `RegExpRule()`      | Allows using a regular expression as a validation rule. |
+| `ContainsAny()` | Checks if the input contains any string from the provided list.      |
+| `IsIn()`      | Checks if the input is in the provided list. |
+| `IsNotIn()`      | Checks if the input is not in the provided list. |
+| `NotContainsAny()`      | Checks if the input does not contain any item from the provided list. |
+
+| Rules for `magic`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsOptional()` | Allows skipping errors if the input is null.      |
+
+| Rules for `dates`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsDateAfter()` | Checks if the date is after the specified date.      |
+| `IsDate()` | Checks if the input is a valid date format.      |
+| `IsDateMillis()` | Checks if the input is a valid date format for milliseconds since epoch.      |
 
 
 ## How to Use
