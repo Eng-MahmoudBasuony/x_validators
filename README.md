@@ -60,6 +60,23 @@ Don't forget to `flutter pub get`.
 | `IsEgyptianPhone()` | Verifies if the input is a valid Egyptian phone number.      |
 | `ISKsaPhone()`      | Verifies if the input is a valid Saudi Arabian phone number. |
 
+| Rules for `It`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsEmail()` | Verifies if the input is a valid email address.      |
+| `IsBool()`      | Verifies if the input is a valid boolean value. |
+| `IsIpAddress()`      | Verifies if the input is a valid IP address. |
+| `IsPort()`      | Verifies if the input is a valid port number. |
+| `RegExpRule()`      | Allows using a regular expression as a validation rule. |
+
+| Rules for `It`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsEmail()` | Verifies if the input is a valid email address.      |
+| `IsBool()`      | Verifies if the input is a valid boolean value. |
+| `IsIpAddress()`      | Verifies if the input is a valid IP address. |
+| `IsPort()`      | Verifies if the input is a valid port number. |
+| `RegExpRule()`      | Allows using a regular expression as a validation rule. |
+
+
 ## How to Use
 
 #### 📚Basic use
