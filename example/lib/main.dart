@@ -118,7 +118,11 @@ class HomePage extends StatelessWidget {
                     TextXValidationRule failedRule) {
                   // Logs information about the failed validation for further analysis.
                   log("###### Validation failed for input #### : $input");
-                  log("#### Failed rule #### : $failedRule");
+                  log("::::::: error  ${failedRule.error} ::::::::");
+
+                  for (var element in rules) {
+                    log("::::::: Class Name ${element.runtimeType.toString()} ::::::::");
+                  }
                 }),
               ),
             ],
