@@ -80,6 +80,10 @@ Don't forget to `flutter pub get`.
 |---------------------|--------------------------------------------------------------|
 | `IsOptional()` | Allows skipping errors if the input is null.      |
 
+| Rules for `colors`   | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| `IsHexColor()` | Checks if the input is a valid hex color.      |
+
 | Rules for `dates`   | Description                                                  |
 |---------------------|--------------------------------------------------------------|
 | `IsDateAfter()` | Checks if the date is after the specified date.      |
