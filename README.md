@@ -20,7 +20,7 @@ Add the following to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-   x_validators: ^1.0.6
+   x_validators: ^1.0.7
 ```
 
 Don't forget to `flutter pub get`.
