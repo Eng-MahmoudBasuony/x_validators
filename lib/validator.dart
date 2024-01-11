@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:x_validators/tr.dart';
 
 import 'x_validators.dart';
 
 typedef OnFailureCallBack = void Function(
   /// the text field content
-  String? fieldInput,
+  String? input,
 
   /// the rules for this failed
   List<TextXValidationRule> rules,
@@ -29,12 +31,8 @@ String? Function(String?) xValidator(
 }) {
   return (String? input) {
     //if input is Empty return null (no thing)
-    if (input == null || input.isEmpty) return null;
+    if (input == null) return null;
 
-    /// if the validator loop has any `IsOptional` Rule this will make
-    /// this variables = `true`;
-    /// we will need to decide later on if the loop has
-    /// `IsOptional` rule on it or not
     var isOptional = false;
 
     /// will contains the first failed rule message

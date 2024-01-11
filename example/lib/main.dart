@@ -49,61 +49,61 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ListView(
             children: [
+              // TextFormField(
+              //   decoration: const InputDecoration(labelText: 'IsRequired'),
+              //   validator: xValidator([
+              //     IsRequired(),
+              //   ]),
+              // ),
+              // TextFormField(
+              //   decoration: const InputDecoration(labelText: 'IsOptional'),
+              //   validator: xValidator([
+              //     // if the textField contains value the rest of the validators
+              //     // will run else it will pass alidation with checking them
+              //     IsOptional(),
+              //
+              //     /// the input value must be a
+              //     /// valid (`well formatted`) email address
+              //     const IsEmail(),
+              //   ]),
+              // ),
+              // TextFormField(
+              //   decoration:
+              //       const InputDecoration(labelText: 'IsRequired AND IsEmail'),
+              //   validator: xValidator([
+              //     IsRequired(),
+              //
+              //     /// the input value must be a valid (`well formatted`)
+              //     ///  email address
+              //     const IsEmail(),
+              //   ]),
+              // ),
+              // TextFormField(
+              //   decoration:
+              //       const InputDecoration(labelText: 'MinLenght AND IsEmail'),
+              //   validator: xValidator([
+              //     IsRequired(),
+              //
+              //     /// the input min length must be >= 5
+              //     MinLength(10),
+              //
+              //     /// the input max length must be <= 10
+              //     MaxLength(15),
+              //   ]),
+              // ),
+              // TextFormField(
+              //   decoration:
+              //       const InputDecoration(labelText: 'IsIn AND IsNotIn'),
+              //   validator: xValidator(
+              //     [
+              //       IsRequired(),
+              //       IsIn(['white', 'black', 'gray']),
+              //       IsNotIn(['red', 'blue', 'orange']),
+              //     ],
+              //   ),
+              // ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'IsRequired'),
-                validator: xValidator([
-                  IsRequired(),
-                ]),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'IsOptional'),
-                validator: xValidator([
-                  // if the textField contains value the rest of the validators
-                  // will run else it will pass alidation with checking them
-                  IsOptional(),
-
-                  /// the input value must be a
-                  /// valid (`well formatted`) email address
-                  const IsEmail(),
-                ]),
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'IsRequired AND IsEmail'),
-                validator: xValidator([
-                  IsRequired(),
-
-                  /// the input value must be a valid (`well formatted`)
-                  ///  email address
-                  const IsEmail(),
-                ]),
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'MinLenght AND IsEmail'),
-                validator: xValidator([
-                  IsRequired(),
-
-                  /// the input min length must be >= 5
-                  MinLength(10),
-
-                  /// the input max length must be <= 10
-                  MaxLength(15),
-                ]),
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'IsIn AND IsNotIn'),
-                validator: xValidator(
-                  [
-                    IsRequired(),
-                    IsIn(['white', 'black', 'gray']),
-                    IsNotIn(['red', 'blue', 'orange']),
-                  ],
-                ),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'IsRequired'),
+                decoration: const InputDecoration(labelText: 'IsRequiredddd'),
                 validator: xValidator([
                   // Ensures that the input is not empty with a custom error message.
                   IsRequired("Field cannot be empty"),
