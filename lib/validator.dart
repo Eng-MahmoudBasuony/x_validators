@@ -1,11 +1,12 @@
-
+// Importing necessary libraries and dependencies
 import 'package:x_validators/tr.dart';
 
 import 'x_validators.dart';
 
+// Defining a callback type for handling validation failures
 typedef OnFailureCallBack = void Function(
   /// the text field content
-  String? callBackInput,
+  String? inputCallBack,
 
   /// the rules for this failed
   List<TextXValidationRule> rules,
@@ -14,56 +15,53 @@ typedef OnFailureCallBack = void Function(
   TextXValidationRule failedRule,
 );
 
-/// ? build and return `String Function(String value)`
-/// ? which triggers the provided validation rules
-/// * how the validation loop works
-/// it will loop for each in the rules List
-/// if the role is type of optional it wail mark the validation process
-///  for ths item as optional
-/// which mans in case of any validation
-///  fails and the value is null there will be no error
-/// but if the validations fails and the value is not
-/// null will return the first fail error message
+/// A function that builds and returns a `String Function(String value)`
+/// which triggers the provided validation rules.
+///
+/// This function performs a validation loop for each rule in the provided list.
+/// If a rule is of type `IsOptional`, the validation process marks the item as optional,
+/// meaning that if the validation fails and the value is null, there will be no error.
+/// However, if the validation fails and the value is not null, it returns the first failed error message.
 String? Function(String?) xValidator(
   List<TextXValidationRule> rules, {
   OnFailureCallBack? onFailureCallBack,
 }) {
   return (String? input) {
-    //if input is Empty return null (no thing)
+    // If the input is empty, return null (no error)
     if (input == null) return null;
 
-    var isOptional = false;
+    var isOptional = false; // Flag to track if the validation is optional
 
-    /// will contains the first failed rule message
+    /// Will contain the first failed rule message
     String? msg;
 
     for (final rule in rules) {
-      /// if any rules contains `IsOptional`
-      /// the validator loop will return `TextFiled` value `isEmpty`
-      /// and will not consider any faller from any rule
-      /// ! else it will work as usual and validated the next rule and return
-      ///  only the first failure
+      /// If any rule is of type `IsOptional`,
+      /// the validator loop will mark the validation process as optional,
+      /// and it will not consider any failure from any rule.
+      /// Otherwise, it works as usual and validates the next rule,
+      /// returning only the first failure.
       if (rule is IsOptional) isOptional = true;
 
-      /// * call the validate function and
-      /// if it return null then the will be no error ;
-      /// else ir will return the failure message
-      /// which will be return as the validation
-      ///  error for the entire validation process
+      /// Call the validate function and
+      /// if it returns null, there will be no error;
+      /// otherwise, it will return the failure message,
+      /// which serves as the validation error for the entire process.
       msg = rule.isValid(input)
           ? null
           : (rule.error ?? XValidatorsLocalization.translate(rule));
 
-      /// if the failure message `msg` has value on it
-      /// that means some rule has failed
-      /// and we return only the first failure
-      /// so there is no reason to continue validation the remain rules
+      /// If the failure message `msg` has a value,
+      /// it means some rule has failed.
+      /// Return only the first failure,
+      /// and there is no reason to continue validating the remaining rules.
       if (msg != null) {
         onFailureCallBack?.call(input, rules, rule);
         break;
       }
     }
 
+    // If it's optional and the input is empty, return null (no error)
     if (isOptional && isEmpty(input)) return null;
 
     return msg;
