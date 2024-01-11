@@ -60,44 +60,44 @@ Don't forget to `flutter pub get`.
 | `IsEgyptianPhone()` | Verifies if the input is a valid Egyptian phone number.      |
 | `ISKsaPhone()`      | Verifies if the input is a valid Saudi Arabian phone number. |
 
-| Rules for `It`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `IsEmail()` | Verifies if the input is a valid email address.      |
-| `IsBool()`      | Verifies if the input is a valid boolean value. |
-| `IsIpAddress()`      | Verifies if the input is a valid IP address. |
-| `IsPort()`      | Verifies if the input is a valid port number. |
-| `RegExpRule()`      | Allows using a regular expression as a validation rule. |
+| Rules for `It`  | Description                                             |
+|-----------------|---------------------------------------------------------|
+| `IsEmail()`     | Verifies if the input is a valid email address.         |
+| `IsBool()`      | Verifies if the input is a valid boolean value.         |
+| `IsIpAddress()` | Verifies if the input is a valid IP address.            |
+| `IsPort()`      | Verifies if the input is a valid port number.           |
+| `RegExpRule()`  | Allows using a regular expression as a validation rule. |
 
 
-| Rules for `lists`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `ContainsAny()` | Checks if the input contains any string from the provided list.      |
-| `IsIn()`      | Checks if the input is in the provided list. |
-| `IsNotIn()`      | Checks if the input is not in the provided list. |
-| `NotContainsAny()`      | Checks if the input does not contain any item from the provided list. |
+| Rules for `lists`  | Description                                                           |
+|--------------------|-----------------------------------------------------------------------|
+| `ContainsAny()`    | Checks if the input contains any string from the provided list.       |
+| `IsIn()`           | Checks if the input is in the provided list.                          |
+| `IsNotIn()`        | Checks if the input is not in the provided list.                      |
+| `NotContainsAny()` | Checks if the input does not contain any item from the provided list. |
 
-| Rules for `magic`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `IsOptional()` | Allows skipping errors if the input is null.      |
+| Rules for `magic` | Description                                  |
+|-------------------|----------------------------------------------|
+| `IsOptional()`    | Allows skipping errors if the input is null. |
 
-| Rules for `colors`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `IsHexColor()` | Checks if the input is a valid hex color.      |
+| Rules for `colors` | Description                               |
+|--------------------|-------------------------------------------|
+| `IsHexColor()`     | Checks if the input is a valid hex color. |
 
-| Rules for `dates`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `IsDateAfter()` | Checks if the date is after the specified date.      |
-| `IsDate()` | Checks if the input is a valid date format.      |
-| `IsDateMillis()` | Checks if the input is a valid date format for milliseconds since epoch.      |
+| Rules for `dates` | Description                                                              |
+|-------------------|--------------------------------------------------------------------------|
+| `IsDateAfter()`   | Checks if the date is after the specified date.                          |
+| `IsDate()`        | Checks if the input is a valid date format.                              |
+| `IsDateMillis()`  | Checks if the input is a valid date format for milliseconds since epoch. |
 
-| Rules for `languages`   | Description                                                  |
-|---------------------|--------------------------------------------------------------|
-| `IsArabicChars()` | Checks if the input consists of Arabic characters.      |
-| `IsEnglishChars()` | Checks if the input consists of English characters.      |
-| `IsLtrLanguage()` | Checks if the language code represents an LTR language.      |
-| `IsArabicChars()` | Checks if the input consists of Arabic characters.      |
-| `IsNumbersOnly()` | Checks if the input consists of numbers only.      |
-| `IsRTLLanguage()` | Checks if the language code represents an RTL language.      |
+| Rules for `languages` | Description                                             |
+|-----------------------|---------------------------------------------------------|
+| `IsArabicChars()`     | Checks if the input consists of Arabic characters.      |
+| `IsEnglishChars()`    | Checks if the input consists of English characters.     |
+| `IsLtrLanguage()`     | Checks if the language code represents an LTR language. |
+| `IsArabicChars()`     | Checks if the input consists of Arabic characters.      |
+| `IsNumbersOnly()`     | Checks if the input consists of numbers only.           |
+| `IsRTLLanguage()`     | Checks if the language code represents an RTL language. |
 
 ## How to Use
 

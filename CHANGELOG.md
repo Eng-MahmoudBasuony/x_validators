@@ -25,3 +25,7 @@
 - refactor:♻️ 🗑️ Improve code readability
 - docs:📝 Update README
 - fix: 🛠️🐞Fixed the Bug with v1.0.4
+
+## [1.0.6]-[11-1-2024] Update README
+
+- refactor:♻️ 🗑️ Improve code readability
