@@ -1,3 +1,5 @@
+[![Stand With Palestine](https://raw.githubusercontent.com/TheBSD/StandWithPalestine/main/banner-no-action.svg)](https://thebsd.github.io/StandWithPalestine)
+
 <p align="center">
   <a href="#"><img src="https://raw.githubusercontent.com/Eng-MahmoudBasuony/x_validators/main/logo_x_validators.png" width=350 height=auto /></a>
 </p>
