@@ -1,6 +1,6 @@
 name: x_validators
 description: X Validators is a library that simplifies data validation in your applications.
-version: 1.0.6
+version: 1.0.8
 homepage: https://github.com/Eng-MahmoudBasuony/x_validators
 repository: https://github.com/Eng-MahmoudBasuony/x_validators
 
@@ -14,4 +14,4 @@ dependencies:
 
 dev_dependencies:
   lints: ^3.0.0
-  test: ^1.25.0
+  test: ^1.25.4

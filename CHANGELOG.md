@@ -29,3 +29,11 @@
 ## [1.0.6]-[11-1-2024] Update README
 
 - refactor:♻️ 🗑️ Improve code readability
+
+## [1.0.7]-[11-1-2024] Update DOC
+
+- docs:📝 Update Doc
+
+## [1.0.8]-[21-04-2024] Update DOC 
+
+- docs:📝 Update Doc (Support Palestine)
