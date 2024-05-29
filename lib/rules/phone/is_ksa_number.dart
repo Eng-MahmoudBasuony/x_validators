@@ -13,3 +13,5 @@ bool isKsaPhone(String input) {
   return RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$')
       .hasMatch(input);
 }
+
+// https://gist.github.com/homaily/8672499
