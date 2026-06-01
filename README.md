@@ -36,7 +36,6 @@ that plug straight into any `TextFormField.validator`.
   - [Standalone helper functions](#standalone-helper-functions)
 - [Good to know](#-good-to-know)
 - [Migrating to 2.0.0](#migrating-to-200)
-- [Contributing](#-contributing)
 - [License](#-license)
 
 ## 🚀 Installation
@@ -632,15 +631,25 @@ const ContainsAny(['a'], caseSensitive: true);      // actually case-sensitive
 > `urls/is_instgram_url.dart` → `urls/is_instagram_url.dart`. Importing the
 > package barrel (`package:x_validators/x_validators.dart`) needs no change.
 
-## 🤝 Contributing
-
-Issues and pull requests are welcome. Please run `dart analyze` and `dart test`
-before opening a PR.
-
 ## 📄 License
 
 See [**LICENSE**](https://github.com/Eng-MahmoudBasuony/x_validators/blob/main/LICENSE).
 
-## 👨🏻‍💻 Authors
+## 👨🏻‍💻 Author
 
-- [@Eng-MahmoudBasuony](https://github.com/Eng-MahmoudBasuony)
+<table>
+  <tr>
+    <td width="120">
+      <a href="https://github.com/Eng-MahmoudBasuony">
+        <img src="https://github.com/Eng-MahmoudBasuony.png?size=120" width="100" alt="Mahmoud Basuony" />
+      </a>
+    </td>
+    <td>
+      <strong><a href="https://github.com/Eng-MahmoudBasuony">Mahmoud Basuony</a></strong><br>
+      Software Engineer<br><br>
+      If x_validators saved you some boilerplate, a ⭐ on the
+      <a href="https://github.com/Eng-MahmoudBasuony/x_validators">repo</a>
+      is appreciated.
+    </td>
+  </tr>
+</table>
