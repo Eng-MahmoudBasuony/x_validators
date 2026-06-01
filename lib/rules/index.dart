@@ -3,7 +3,7 @@
 /// This library exports a wide range of validators, including color validation, date validation,
 /// IT-related validation, language validation, list-related validation, magic validation,
 /// number validation, phone number validation, text validation, and URL validation.
-library x_validators;
+library;
 
 // * Exporting color-related validators
 export 'colors/is_hex_color.dart';
@@ -14,10 +14,14 @@ export 'dates/is_date_mills.dart';
 // * Exporting IT-related validators
 export 'it/is_boolean.dart';
 export 'it/is_email.dart';
+export 'it/is_ip_address.dart';
 export 'it/is_port.dart';
 export 'it/regx.dart';
 // * Exporting language-related validators
+export 'languages/is_arabic_chars.dart';
+export 'languages/is_english_char.dart';
 export 'languages/is_ltr_language.dart';
+export 'languages/is_number_only.dart';
 export 'languages/is_rtl_language.dart';
 // * Exporting list-related validators
 export 'lists/contains_any.dart';
@@ -48,5 +52,6 @@ export 'text/starts_with.dart';
 // * Exporting URL-related validators
 export 'urls/is_facebook_url.dart';
 export 'urls/is_instgram_url.dart';
+export 'urls/is_secure_url.dart';
 export 'urls/is_url.dart';
 export 'urls/is_youtube_url.dart';

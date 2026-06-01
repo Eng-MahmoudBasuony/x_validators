@@ -1,9 +1,10 @@
 import '../../x_validators.dart';
 
+/// Validates that the input parses to a date strictly after [date].
 class IsDateAfter extends TextXValidationRule {
   final DateTime date;
 
-  IsDateAfter(this.date, [String? error]) : super(error);
+  const IsDateAfter(this.date, [String? error]) : super(error);
 
   @override
   bool isValid(String input) => isDateAfter(input, date);
@@ -12,12 +13,13 @@ class IsDateAfter extends TextXValidationRule {
   String toString() => 'must be after $date';
 }
 
+/// Returns `true` if [input] (a `String` or `DateTime`) is strictly after [date].
 bool isDateAfter(Object? input, DateTime date) {
-  DateTime? _input;
+  DateTime? parsed;
   if (input is String) {
-    _input = DateTime.tryParse(input);
+    parsed = DateTime.tryParse(input);
   } else if (input is DateTime) {
-    _input = input;
+    parsed = input;
   }
-  return _input != null && _input.isAfter(date);
+  return parsed != null && parsed.isAfter(date);
 }

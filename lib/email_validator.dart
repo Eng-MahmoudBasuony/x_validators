@@ -3,6 +3,7 @@ import 'dart:core';
 /// The Type enum
 ///
 /// The domain type is either None, Alphabetic, Numeric or AlphaNumeric
+// ignore: constant_identifier_names
 enum SubdomainType { None, Alphabetic, Numeric, AlphaNumeric }
 
 ///The EmailValidator entry point
@@ -119,8 +120,8 @@ class EmailXValidator {
 
     _index++;
 
-    while (
-        _index < text.length && _isDomain(text[_index], allowInternational)) {
+    while (_index < text.length &&
+        _isDomain(text[_index], allowInternational)) {
       _index++;
     }
 
@@ -130,7 +131,10 @@ class EmailXValidator {
   // Skips checking of domain if domainType is numeric and returns false
   // Otherwise, return true
   static bool _skipDomain(
-      String text, bool allowTopLevelDomains, bool allowInternational) {
+    String text,
+    bool allowTopLevelDomains,
+    bool allowInternational,
+  ) {
     if (!_skipSubDomain(text, allowInternational)) {
       return false;
     }
@@ -319,8 +323,11 @@ class EmailXValidator {
   /// If [allowInternational] is `true`, then the validator
   /// will use the newer International Email standards for validating
   /// the email address.
-  static bool validate(String email,
-      [bool allowTopLevelDomains = false, bool allowInternational = true]) {
+  static bool validate(
+    String email, [
+    bool allowTopLevelDomains = false,
+    bool allowInternational = true,
+  ]) {
     _index = 0;
 
     if (email.isEmpty || email.length >= 255) {

@@ -1,5 +1,6 @@
 import '../../x_validators.dart';
 
+/// Validates that the input is a date string `DateTime.parse` can read.
 class IsDate extends TextXValidationRule {
   const IsDate([super.error]);
 

@@ -5,7 +5,7 @@ import '../../x_validators.dart';
 class MinLength extends TextXValidationRule {
   final int min;
 
-  MinLength(this.min, [String? error]) : super(error);
+  const MinLength(this.min, [String? error]) : super(error);
 
   @override
   bool isValid(String input) {
@@ -16,6 +16,7 @@ class MinLength extends TextXValidationRule {
   String toString() => 'validation.min length is $min';
 }
 
+/// Returns `true` if [input], trimmed, is at least [min] characters long.
 bool minLength(String? input, int min) {
   if (input == null) return false;
   return input.trim().length >= min;

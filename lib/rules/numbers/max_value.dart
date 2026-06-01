@@ -1,9 +1,10 @@
 import '../../x_validators.dart';
 
+/// Validates that the parsed numeric input is less than or equal to [max].
 class MaxValue extends TextXValidationRule {
   final num max;
 
-  MaxValue(this.max, [String? error]) : super(error);
+  const MaxValue(this.max, [String? error]) : super(error);
 
   @override
   bool isValid(String input) => maxValue(input, max);
@@ -11,16 +12,17 @@ class MaxValue extends TextXValidationRule {
   String toString() => 'validation.must_be_max';
 }
 
+/// Returns `true` if [value] parses to a number less than or equal to [max].
 bool maxValue(Object? value, num max) {
-  num? _val;
+  num? val;
   if (value is String) {
-    _val = num.tryParse(value);
+    val = num.tryParse(value);
   } else if (value is num) {
-    _val = value;
+    val = value;
   } else if (value is int) {
-    _val = value;
+    val = value;
   } else if (value is double) {
-    _val = value;
+    val = value;
   }
-  return _val != null && _val <= max;
+  return val != null && val <= max;
 }

@@ -5,11 +5,8 @@ class Match extends TextXValidationRule {
   final String other;
   final bool caseSensitive;
 
-  Match(
-    this.other, {
-    this.caseSensitive = true,
-    String? error,
-  }) : super(error);
+  const Match(this.other, {this.caseSensitive = true, String? error})
+    : super(error);
 
   @override
   bool isValid(String input) => caseSensitive
@@ -21,10 +18,7 @@ class Match extends TextXValidationRule {
 }
 
 /// checks if two `Strings` are the same
-bool match(
-  Object? input,
-  Object? other,
-) =>
+bool match(Object? input, Object? other) =>
     input != null &&
         other != null &&
         input.runtimeType == other.runtimeType &&

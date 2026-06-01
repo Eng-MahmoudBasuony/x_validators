@@ -1,19 +1,18 @@
 // Importing necessary libraries and dependencies
-import 'package:x_validators/tr.dart';
-
 import 'x_validators.dart';
 
 // Defining a callback type for handling validation failures
-typedef OnFailureCallBack = void Function(
-  /// the text field content
-  String? inputCallBack,
+typedef OnFailureCallBack =
+    void Function(
+      /// the text field content
+      String? inputCallBack,
 
-  /// the rules for this failed
-  List<TextXValidationRule> rules,
+      /// the rules for this failed
+      List<TextXValidationRule> rules,
 
-  ///
-  TextXValidationRule failedRule,
-);
+      ///
+      TextXValidationRule failedRule,
+    );
 
 /// A function that builds and returns a `String Function(String value)`
 /// which triggers the provided validation rules.

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dart analyze *)",
+      "Bash(echo \"---EXIT: $?---\")",
+      "Bash(dart --version)",
+      "Bash(dart pub *)",
+      "Bash(rm -f test/lib_test.dart)",
+      "Bash(ls test/)",
+      "Bash(dart test *)",
+      "Bash(dart format *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(echo \"format_exit=$?\")",
+      "Bash(cd \"/Users/basuony/FlutterProjects/MB94/x_validators\" && find . -name \"language_utils.dart\" -not -path \"*/.dart_tool/*\" 2>/dev/null; echo \"---\"; ls -la core/utils/ 2>/dev/null || echo \"no core/utils in package root\"; echo \"---parent---\"; ls -la ../core/utils/ 2>/dev/null | head; ls -la ../../core/utils/ 2>/dev/null | head)",
+      "Bash(dart run *)",
+      "Bash(which pana *)",
+      "Bash(awk ' *)",
+      "Bash(flutter --version)",
+      "Bash(flutter pub *)",
+      "Bash(flutter analyze *)"
+    ]
+  }
+}

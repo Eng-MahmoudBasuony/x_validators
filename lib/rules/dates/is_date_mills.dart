@@ -9,10 +9,7 @@ class IsDateMillis extends TextXValidationRule {
   /// * [isUtc] - if `true` the `DateTime` will be in UTC timezone,
   /// * otherwise it will be in local timezone
 
-  IsDateMillis({
-    this.isUtc = false,
-    String? error,
-  }) : super(error);
+  const IsDateMillis({this.isUtc = false, String? error}) : super(error);
 
   @override
   bool isValid(String input) => isDateMills(input, isUtc: isUtc);
@@ -26,10 +23,7 @@ class IsDateMillis extends TextXValidationRule {
 bool isDateMills(String v, {bool isUtc = false}) {
   try {
     if (!(int.tryParse(v) != null)) return false;
-    DateTime.fromMillisecondsSinceEpoch(
-      int.tryParse(v) ?? -1,
-      isUtc: isUtc,
-    );
+    DateTime.fromMillisecondsSinceEpoch(int.tryParse(v) ?? -1, isUtc: isUtc);
     return true;
   } catch (e) {
     return false;

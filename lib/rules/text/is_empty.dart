@@ -1,7 +1,8 @@
 import '../../x_validators.dart';
 
+/// Validates that the input is empty or whitespace-only.
 class IsEmpty extends TextXValidationRule {
-  IsEmpty([super.error]);
+  const IsEmpty([super.error]);
 
   @override
   bool isValid(String input) => isEmpty(input);

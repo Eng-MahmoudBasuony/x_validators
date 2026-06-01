@@ -1,5 +1,6 @@
 import '../../x_validators.dart';
 
+/// Validates that the input is an IPv4 address (four dot-separated octets 0–255).
 class IsIpAddress extends TextXValidationRule {
   const IsIpAddress([super.error]);
 
@@ -10,6 +11,7 @@ class IsIpAddress extends TextXValidationRule {
   String toString() => 'validation.is_ip_address';
 }
 
+/// Returns `true` if [input] is a string holding a dotted-quad IPv4 address.
 bool isIpAddress(Object? input) {
   if (input == null || input is! String) {
     return false;

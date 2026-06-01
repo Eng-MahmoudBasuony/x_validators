@@ -1,9 +1,9 @@
 import '../../x_validators.dart';
 
-// A validation rule to check if a language code is RTL
+/// A validation rule that checks whether a language code is right-to-left (RTL).
 class IsRTLLanguage extends TextXValidationRule {
   // Constructor to initialize the rule with an optional error message
-  IsRTLLanguage([super.error]);
+  const IsRTLLanguage([super.error]);
 
   // Override isValid method to implement the RTL language validation
   @override

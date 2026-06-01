@@ -1,7 +1,8 @@
 import '../../x_validators.dart';
 
+/// Validates that the input is not empty after trimming.
 class IsRequired extends TextXValidationRule {
-  IsRequired([super.error]);
+  const IsRequired([super.error]);
 
   @override
   bool isValid(String input) => isNotEmpty(input);

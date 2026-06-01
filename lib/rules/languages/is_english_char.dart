@@ -1,7 +1,8 @@
 import '../../x_validators.dart';
 
+/// Validates that the input contains only English (A–Z) letters.
 class IsEnglishChars extends TextXValidationRule {
-  IsEnglishChars([super.error]);
+  const IsEnglishChars([super.error]);
 
   @override
   bool isValid(String input) => isEnglishChars(input);
@@ -10,4 +11,5 @@ class IsEnglishChars extends TextXValidationRule {
   String toString() => 'validation.is_english_chars';
 }
 
+/// Returns `true` if [input] consists of English letters only.
 bool isEnglishChars(String input) => RegExp(r'^[a-zA-Z]+$').hasMatch(input);

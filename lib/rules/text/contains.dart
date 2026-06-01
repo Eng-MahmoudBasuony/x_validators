@@ -5,7 +5,7 @@ import '../../x_validators.dart';
 class Contains extends TextXValidationRule {
   final String value;
 
-  Contains(this.value, [String? error]) : super(error);
+  const Contains(this.value, [String? error]) : super(error);
 
   @override
   bool isValid(String input) => input.trim().contains(value);

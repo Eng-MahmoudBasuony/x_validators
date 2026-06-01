@@ -11,7 +11,7 @@ class IsSecureUrl extends TextXValidationRule {
   String toString() => 'validation.is_not_secure_url';
 }
 
-// returns true if the input is valid port number
+/// Returns `true` if [input] is a string starting with `https://` (case-insensitive).
 bool isSecureUrl(Object? input) {
   String? url;
   if (input == null) {

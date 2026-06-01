@@ -4,7 +4,7 @@
 /// predefined validation rules, an abstract class for creating custom rules,
 /// and a general-purpose `xValidator` function for performing validations.
 /// Additionally, it exports language utilities from the core package.
-library x_validators;
+library;
 
 // Importing the email validator from the x_validators package
 export 'package:x_validators/email_validator.dart';
@@ -14,6 +14,8 @@ export 'package:x_validators/rules/index.dart';
 export 'package:x_validators/text_rule_class.dart';
 // Exporting the xValidator function for easy access
 export 'package:x_validators/validator.dart';
+// Exporting the localization hook for customizing error messages
+export 'package:x_validators/tr.dart';
 
 // Exporting language utilities from the core/utils directory
 export '../../core/utils/language_utils.dart';

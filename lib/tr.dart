@@ -9,13 +9,12 @@ abstract class XValidatorsLocalization {
   /// If no translation function is registered for a specific rule type, it falls back to the default toString() representation.
   static String translate(TextXValidationRule rule) =>
       _map[rule.runtimeType.toString()] == null
-          ? rule.toString()
-          : _map[rule.runtimeType.toString()]!(rule);
+      ? rule.toString()
+      : _map[rule.runtimeType.toString()]!(rule);
 
   /// Registers a translation function for a specific TextXValidationRule type.
   /// This allows customizing the error message for each validation rule type.
   static void on<T extends TextXValidationRule>(
     String Function(TextXValidationRule) func,
-  ) =>
-      _map[T.toString()] = func;
+  ) => _map[T.toString()] = func;
 }

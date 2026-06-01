@@ -13,7 +13,7 @@ class ContainsAny extends TextXValidationRule {
   String toString() => 'validation.must_contains_any';
 }
 
-// check if the provided string contains any keywords form the provided list
+/// Returns `true` if [v] contains any entry from [list] (case-insensitive by default).
 bool containsAny(
   String v,
   List<String> list, {

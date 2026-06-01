@@ -1,9 +1,10 @@
 import '../../x_validators.dart';
 
+/// Validates that the parsed numeric input is greater than or equal to [min].
 class MinValue extends TextXValidationRule {
   final num min;
 
-  MinValue(this.min, [String? error]) : super(error);
+  const MinValue(this.min, [String? error]) : super(error);
 
   @override
   bool isValid(String input) => minValue(input, min);
@@ -11,16 +12,17 @@ class MinValue extends TextXValidationRule {
   String toString() => 'validation.must_be_min';
 }
 
+/// Returns `true` if [value] parses to a number greater than or equal to [min].
 bool minValue(Object? value, num min) {
-  num? _val;
+  num? val;
   if (value is String) {
-    _val = num.tryParse(value);
+    val = num.tryParse(value);
   } else if (value is num) {
-    _val = value;
+    val = value;
   } else if (value is int) {
-    _val = value;
+    val = value;
   } else if (value is double) {
-    _val = value;
+    val = value;
   }
-  return _val != null && _val >= min;
+  return val != null && val >= min;
 }

@@ -5,10 +5,7 @@ import '../../x_validators.dart';
 class NotContainsAny extends TextXValidationRule {
   final List<String> value;
 
-  NotContainsAny(
-    this.value, [
-    String? error,
-  ]) : super(error);
+  const NotContainsAny(this.value, [String? error]) : super(error);
 
   @override
   String toString() => 'validation.must_not_contains_any';
@@ -17,6 +14,7 @@ class NotContainsAny extends TextXValidationRule {
   bool isValid(String input) => notContainsAny(input, value);
 }
 
+/// Returns `true` if [v] contains none of the entries in [list].
 bool notContainsAny(String v, List<String> list) {
   return !containsAny(v, list);
 }
