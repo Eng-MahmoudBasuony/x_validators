@@ -641,7 +641,7 @@ See [**LICENSE**](https://github.com/Eng-MahmoudBasuony/x_validators/blob/main/L
   <tr>
     <td width="120">
       <a href="https://github.com/Eng-MahmoudBasuony">
-        <img src="https://github.com/Eng-MahmoudBasuony.png?size=120" width="100" alt="Mahmoud Basuony" />
+        <img src="https://raw.githubusercontent.com/Eng-MahmoudBasuony/x_validators/main/author.png" width="110" alt="Mahmoud Basuony" />
       </a>
     </td>
     <td>
