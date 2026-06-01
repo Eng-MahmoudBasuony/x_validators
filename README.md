@@ -33,7 +33,7 @@ that plug straight into any `TextFormField.validator`.
   - [Localizing error messages](#localizing-error-messages)
   - [Standalone helper functions](#standalone-helper-functions)
 - [Good to know](#-good-to-know)
-- [Migrating to 2.0.0](#-migrating-to-200)
+- [Migrating to 2.0.0](#migrating-to-200)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -306,9 +306,9 @@ EmailXValidator.validate('test@example.com'); // true
   `IsRequired` (and every other rule) sees `''` and a required field correctly
   fails on `null`. Add an `IsOptional` rule if you want an empty/`null` value to
   skip the remaining rules and pass. (Before 2.0.0, `null` short-circuited the
-  whole validator to "valid" — see [Migrating to 2.0.0](#-migrating-to-200).)
+  whole validator to "valid" — see [Migrating to 2.0.0](#migrating-to-200).)
 
-## ⬆️ Migrating to 2.0.0
+## Migrating to 2.0.0
 
 2.0.0 is a behavior-only major release: the public API shape is unchanged (same
 rules, same `xValidator` signature), but several rules were tightened to do what
