@@ -24,8 +24,10 @@ that plug straight into any `TextFormField.validator`.
 - [Quick start](#-quick-start)
 - [How it works](#-how-it-works)
 - [API reference](#-api-reference)
+- [Examples for every rule](#examples-for-every-rule)
 - [Usage guide](#-usage-guide)
   - [Composing rules](#composing-rules)
+  - [Real-world recipes](#real-world-recipes)
   - [Custom error messages](#custom-error-messages)
   - [Reacting to failures](#reacting-to-failures-onfailurecallback)
   - [Optional fields](#optional-fields)
@@ -170,7 +172,7 @@ options. When omitted, the rule's default message is used (see
 | Rule | Description |
 |------|-------------|
 | `IsArabicChars([error])` | Input consists of Arabic letters, whitespace and Arabic-Indic digits `٠-٩`. |
-| `IsEnglishChars([error])` | Input consists of English (ASCII) characters. |
+| `IsEnglishChars([error])` | Only English letters `A–Z` (no spaces or digits). |
 | `IsNumbersOnly([error])` | Input is all digits (one or more). |
 | `IsLtrLanguage([error])` | Input is a left-to-right language code. |
 | `IsRTLLanguage([error])` | Input is a right-to-left language code. |
@@ -186,6 +188,202 @@ options. When omitted, the rule's default message is used (see
 | Rule | Description |
 |------|-------------|
 | `IsOptional()` | When present, an **empty** field skips all other rules and passes. |
+
+## Examples for every rule
+
+Every rule is shown below with a passing and a failing input. The examples use
+`rule.isValid(value)` so you can see the boolean directly; inside a form you'd
+normally pass the rule to `xValidator([...])` and get the error message instead
+(see [Composing rules](#composing-rules)). Each rule also has a matching
+top-level function (`isEmail`, `isHexColor`, …) for one-off checks — see
+[Standalone helper functions](#standalone-helper-functions).
+
+### Text
+
+```dart
+const IsRequired().isValid('Jane');           // → true
+const IsRequired().isValid('   ');            // → false  (trimmed empty)
+
+const IsEmpty().isValid('   ');               // → true
+const IsEmpty().isValid('x');                 // → false
+
+const Contains('@').isValid('a@b.com');       // → true
+const Contains('@').isValid('abc');           // → false
+
+const NotContains(' ').isValid('no_spaces');  // → true
+const NotContains(' ').isValid('has space');  // → false
+
+const StartsWith('+20').isValid('+20100');    // → true
+const StartsWith('+20').isValid('0100');      // → false
+
+const EndsWith('.com').isValid('site.com');   // → true
+const EndsWith('.com').isValid('site.org');   // → false
+
+const Match('Yes').isValid('Yes');            // → true   (case-sensitive by default)
+const Match('Yes').isValid('yes');            // → false
+const Match('Yes', caseSensitive: false).isValid('yes'); // → true
+
+const MinLength(3).isValid('abc');            // → true
+const MinLength(3).isValid('ab');             // → false
+
+const MaxLength(5).isValid('abcde');          // → true
+const MaxLength(5).isValid('abcdef');         // → false
+```
+
+### Numbers
+
+```dart
+const IsNumber().isValid('42');               // → true
+const IsNumber().isValid('-7');               // → true
+const IsNumber().isValid('3.14');             // → false  (use IsDecimal)
+const IsNumber().isValid('0x1A');             // → false  (no hex)
+
+const IsDecimal().isValid('3.14');            // → true
+const IsDecimal().isValid('42');              // → true   (integers too)
+const IsDecimal().isValid('abc');             // → false
+
+const IsArabicNum().isValid('123');           // → true   (Latin digits, positive)
+const IsArabicNum().isValid('012');           // → false  (leading zero)
+const IsArabicNum().isValid('0');             // → false
+
+const IsHindiNum().isValid('١٢٣');             // → true   (Arabic-Indic digits)
+const IsHindiNum().isValid('٠١٢');             // → false  (leading ٠)
+const IsHindiNum().isValid('123');            // → false  (Latin digits)
+
+const MinValue(18).isValid('18');             // → true
+const MinValue(18).isValid('17');             // → false
+
+const MaxValue(100).isValid('100');           // → true
+const MaxValue(100).isValid('101');           // → false
+```
+
+### URLs
+
+```dart
+const IsUrl().isValid('https://my-site.co.uk');         // → true
+const IsUrl().isValid('https://a.b.example.com/p?x=1'); // → true
+const IsUrl().isValid('example.com');                   // → false  (no scheme)
+
+const IsSecureUrl().isValid('https://x.com');           // → true
+const IsSecureUrl().isValid('http://x.com');            // → false
+
+const IsFacebookUrl().isValid('https://facebook.com/me');       // → true
+const IsFacebookUrl().isValid('https://facebook.com.evil.com'); // → false
+
+const IsInstagramUrl().isValid('https://instagram.com/me');     // → true
+const IsInstagramUrl().isValid('https://evil.com');             // → false
+
+const IsYoutubeUrl().isValid('https://youtube.com/watch?v=x');  // → true
+const IsYoutubeUrl().isValid('https://vimeo.com/1');            // → false
+```
+
+### Phone
+
+```dart
+const IsEgyptianPhone().isValid('01012345678'); // → true   (010/011/012/015 + 8 digits)
+const IsEgyptianPhone().isValid('01312345678'); // → false  (013 is not a valid prefix)
+
+const ISKsaPhone().isValid('0512345678');       // → true
+const ISKsaPhone().isValid('+966512345678');    // → true
+const ISKsaPhone().isValid('0612345678');       // → false
+```
+
+### IT
+
+```dart
+const IsEmail().isValid('jane.doe@example.com'); // → true
+const IsEmail().isValid('plainaddress');         // → false
+
+const IsBool().isValid('true');                  // → true
+const IsBool().isValid(' FALSE ');               // → true   (trimmed, case-insensitive)
+const IsBool().isValid('yes');                   // → false
+
+const IsIpAddress().isValid('192.168.1.1');      // → true
+const IsIpAddress().isValid('192.168.001.001');  // → false  (leading zeros)
+
+const IsPort().isValid('8080');                  // → true   (0–65535)
+const IsPort().isValid('65536');                 // → false
+
+RegExpRule(RegExp(r'^[A-Z]{3}$')).isValid('EGP'); // → true
+RegExpRule(RegExp(r'^[A-Z]{3}$')).isValid('usd'); // → false
+```
+
+### Lists
+
+```dart
+const IsIn(['red', 'green', 'blue']).isValid('green');  // → true
+const IsIn(['red', 'green', 'blue']).isValid('yellow'); // → false
+
+const IsNotIn(['admin', 'root']).isValid('guest');      // → true
+const IsNotIn(['admin', 'root']).isValid('admin');      // → false
+
+const ContainsAny(['http', 'https']).isValid('https://x'); // → true
+const ContainsAny(['http', 'https']).isValid('ftp://x');   // → false
+const ContainsAny(['USD']).isValid('usd ok');                      // → true   (case-insensitive)
+const ContainsAny(['USD'], caseSensitive: true).isValid('usd ok'); // → false
+
+const NotContainsAny(['<', '>']).isValid('safe'); // → true
+const NotContainsAny(['<', '>']).isValid('a<b');  // → false
+```
+
+### Dates
+
+```dart
+const IsDate().isValid('2026-06-01'); // → true
+const IsDate().isValid('not-a-date'); // → false
+
+const IsDateMillis().isValid('1700000000000'); // → true
+const IsDateMillis().isValid('3.14');          // → false
+
+IsDateAfter(DateTime(2020)).isValid('2026-01-01'); // → true
+IsDateAfter(DateTime(2020)).isValid('2019-01-01'); // → false
+```
+
+### Languages
+
+```dart
+const IsArabicChars().isValid('مرحبا بك');  // → true
+const IsArabicChars().isValid('مرحبا ١٢٣'); // → true   (Arabic-Indic digits allowed)
+const IsArabicChars().isValid('hello');     // → false
+
+const IsEnglishChars().isValid('Hello');       // → true
+const IsEnglishChars().isValid('Hello World'); // → false  (no spaces)
+const IsEnglishChars().isValid('abc123');      // → false  (letters only)
+
+const IsNumbersOnly().isValid('12345'); // → true
+const IsNumbersOnly().isValid('12a');   // → false
+
+const IsLtrLanguage().isValid('en'); // → true
+const IsLtrLanguage().isValid('ar'); // → false
+
+const IsRTLLanguage().isValid('ar'); // → true
+const IsRTLLanguage().isValid('en'); // → false
+```
+
+### Colors
+
+```dart
+const IsHexColor().isValid('#FFF');      // → true   (3 digits)
+const IsHexColor().isValid('A1B2C3');    // → true   (6 digits, '#' optional)
+const IsHexColor().isValid('#FF0000FF'); // → true   (8 digits, with alpha)
+const IsHexColor().isValid('red');       // → false
+```
+
+### Magic — `IsOptional`
+
+`IsOptional` only makes sense inside a validator: an empty value skips the rest
+and passes, but a non-empty value still has to satisfy them.
+
+```dart
+final validate = xValidator([
+  const IsOptional(),
+  const IsEmail(),
+]);
+
+validate('');       // → null  (empty is allowed)
+validate('a@b.co'); // → null  (valid email)
+validate('x');      // → IsEmail's message  (non-empty must be valid)
+```
 
 ## 🛠 Usage guide
 
@@ -204,6 +402,85 @@ final validate = xValidator([
 validate('');        // → IsRequired's message
 validate('abc');     // → MinLength's message
 validate('hunter2!'); // → null (valid)
+```
+
+### Real-world recipes
+
+Ready-to-paste validators for the fields you actually build. Each returns the
+first failing rule's message, or `null` when the value passes — exactly what
+`TextFormField.validator` expects.
+
+**Password** — required, length-bounded, must contain a special character:
+
+```dart
+final password = xValidator([
+  const IsRequired('Password is required'),
+  const MinLength(8, 'At least 8 characters'),
+  const MaxLength(64, 'At most 64 characters'),
+  const ContainsAny(['!', '@', '#', '%'], error: 'Add a special character'),
+]);
+
+password('');         // → 'Password is required'
+password('abc');      // → 'At least 8 characters'
+password('abcdefgh'); // → 'Add a special character'
+password('abcdefg!'); // → null (valid)
+```
+
+**Email** — required and well-formed:
+
+```dart
+final email = xValidator([
+  const IsRequired('Email is required'),
+  const IsEmail('Enter a valid email'),
+]);
+
+email('');             // → 'Email is required'
+email('not-an-email'); // → 'Enter a valid email'
+email('jane@acme.io'); // → null (valid)
+```
+
+**Phone** — required Egyptian mobile number:
+
+```dart
+final phone = xValidator([
+  const IsRequired('Phone is required'),
+  const IsEgyptianPhone('Enter a valid Egyptian number'),
+]);
+
+phone('0100');        // → 'Enter a valid Egyptian number'
+phone('01012345678'); // → null (valid)
+```
+
+**Optional age** — blank is allowed, but if filled it must be a whole number in
+range. Put `IsOptional` first so an empty value skips the rest and passes:
+
+```dart
+final age = xValidator([
+  const IsOptional(),
+  const IsNumber('Digits only'),
+  const MinValue(18, 'Must be 18 or older'),
+  const MaxValue(120, 'Enter a real age'),
+]);
+
+age('');   // → null (optional — blank is fine)
+age('1x'); // → 'Digits only'
+age('16'); // → 'Must be 18 or older'
+age('30'); // → null (valid)
+```
+
+**Optional website** — blank allowed, otherwise a valid secure URL:
+
+```dart
+final website = xValidator([
+  const IsOptional(),
+  const IsUrl('Enter a valid URL'),
+  const IsSecureUrl('Use https://'),
+]);
+
+website('');                  // → null (optional — blank is fine)
+website('not a url');         // → 'Enter a valid URL'
+website('http://insecure.io'); // → 'Use https://'
+website('https://acme.io');    // → null (valid)
 ```
 
 ### Custom error messages
