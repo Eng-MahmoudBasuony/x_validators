@@ -10,6 +10,13 @@ void main() {
       expect(const IsUrl().isValid('http://a.bc'), isTrue);
     });
 
+    test('accepts hyphens, deep subdomains and long TLDs', () {
+      expect(const IsUrl().isValid('https://my-site.co.uk'), isTrue);
+      expect(const IsUrl().isValid('https://a.b.example.com'), isTrue);
+      expect(const IsUrl().isValid('https://example.museum'), isTrue);
+      expect(const IsUrl().isValid('https://example.com:8080/p'), isTrue);
+    });
+
     test('rejects a missing scheme, wrong scheme or bad shape', () {
       expect(const IsUrl().isValid('example.com'), isFalse);
       expect(const IsUrl().isValid('www.example.com'), isFalse);
@@ -88,21 +95,20 @@ void main() {
       expect(const IsYoutubeUrl().isValid('https://vimeo.com/123'), isFalse);
     });
 
-    // NOTE: the social-URL patterns are not anchored at the end, so a matching
-    // host followed by extra labels still passes. Anchoring them is planned as
-    // a breaking change (v2).
-    test('domain-prefix spoofing currently passes (known behavior)', () {
+    // Anchored in 2.0: a matching host followed by extra labels (a classic
+    // suffix spoof like facebook.com.evil.com) is now rejected.
+    test('domain-suffix spoofing is rejected', () {
       expect(
         const IsFacebookUrl().isValid('https://facebook.com.evil.com'),
-        isTrue,
+        isFalse,
       );
       expect(
         const IsInstagramUrl().isValid('https://instagram.com.evil.com'),
-        isTrue,
+        isFalse,
       );
       expect(
         const IsYoutubeUrl().isValid('https://youtube.com.evil.com'),
-        isTrue,
+        isFalse,
       );
     });
   });

@@ -11,4 +11,11 @@ abstract class TextXValidationRule {
   /// Passed through the constructor to provide a custom error message.
   /// If not provided, the rule may use a localized error message.
   final String? error;
+
+  /// The default message (or localization key) shown when the rule fails and
+  /// no inline [error] or registered translator is provided.
+  ///
+  /// Built-in rules override this. The default delegates to [toString] so that
+  /// custom rules which only override `toString()` keep working unchanged.
+  String get defaultMessage => toString();
 }

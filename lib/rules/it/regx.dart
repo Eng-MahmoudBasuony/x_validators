@@ -8,5 +8,5 @@ class RegExpRule extends TextXValidationRule {
   @override
   bool isValid(String input) => regX.hasMatch(input);
   @override
-  String toString() => 'validation.is_not_valid';
+  String get defaultMessage => 'validation.is_not_valid';
 }

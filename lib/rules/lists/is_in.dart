@@ -10,7 +10,7 @@ class IsIn extends TextXValidationRule {
   bool isValid(String input) => isIn(input, list);
 
   @override
-  String toString() => 'validation.must_be_in_list';
+  String get defaultMessage => 'validation.must_be_in_list';
 }
 
 ///  check if `string` is in `List<String>`

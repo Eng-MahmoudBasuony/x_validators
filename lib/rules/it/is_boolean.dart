@@ -7,7 +7,7 @@ class IsBool extends TextXValidationRule {
   @override
   bool isValid(String input) => isBool(input);
   @override
-  String toString() => 'validation.is_not_bool';
+  String get defaultMessage => 'validation.is_not_bool';
 }
 
 /// Returns `true` if [input] is a bool, or the trimmed, case-insensitive

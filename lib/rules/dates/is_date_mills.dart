@@ -15,7 +15,7 @@ class IsDateMillis extends TextXValidationRule {
   bool isValid(String input) => isDateMills(input, isUtc: isUtc);
 
   @override
-  String toString() => 'validation.not_valid_date_millis';
+  String get defaultMessage => 'validation.not_valid_date_millis';
 }
 
 /// checks if the input is a valid `date` to parse by `

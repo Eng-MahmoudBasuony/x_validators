@@ -8,12 +8,12 @@ class IsUrl extends TextXValidationRule {
   bool isValid(String input) => isUrlValid(input);
 
   @override
-  String toString() => 'not_valid_url';
+  String get defaultMessage => 'validation.is_not_url';
 }
 
+final _urlRegExp = RegExp(
+  r'^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?([\/?#][-a-zA-Z0-9()@:%_+.~#?&/=]*)?$',
+);
+
 /// Returns `true` if [url] is a well-formed http or https URL.
-bool isUrlValid(String url) {
-  return RegExp(
-    r'^((https?):\/\/)((www\.)?([a-zA-Z0-9!_$]+)\.([a-zA-Z]{2,5}))\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
-  ).hasMatch(url);
-}
+bool isUrlValid(String url) => _urlRegExp.hasMatch(url);

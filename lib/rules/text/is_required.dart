@@ -7,7 +7,7 @@ class IsRequired extends TextXValidationRule {
   @override
   bool isValid(String input) => isNotEmpty(input);
   @override
-  String toString() => 'required';
+  String get defaultMessage => 'validation.is_required';
 }
 
 /// `trim` the string then checks if `isNotEmpty`

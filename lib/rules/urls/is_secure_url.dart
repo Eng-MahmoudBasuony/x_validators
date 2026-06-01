@@ -8,7 +8,7 @@ class IsSecureUrl extends TextXValidationRule {
   bool isValid(String input) => isSecureUrl(input);
 
   @override
-  String toString() => 'validation.is_not_secure_url';
+  String get defaultMessage => 'validation.is_not_secure_url';
 }
 
 /// Returns `true` if [input] is a string starting with `https://` (case-insensitive).

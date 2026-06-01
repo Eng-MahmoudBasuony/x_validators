@@ -10,7 +10,7 @@ class IsDateAfter extends TextXValidationRule {
   bool isValid(String input) => isDateAfter(input, date);
 
   @override
-  String toString() => 'must be after $date';
+  String get defaultMessage => 'validation.is_not_date_after';
 }
 
 /// Returns `true` if [input] (a `String` or `DateTime`) is strictly after [date].

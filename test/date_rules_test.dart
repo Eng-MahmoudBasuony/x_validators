@@ -69,10 +69,10 @@ void main() {
       expect(isDateAfter(123, DateTime(2020)), isFalse);
     });
 
-    test('toString reports the threshold date', () {
+    test('defaultMessage is the date-after key', () {
       expect(
-        IsDateAfter(DateTime(2020, 1, 1)).toString(),
-        contains('must be after'),
+        IsDateAfter(DateTime(2020, 1, 1)).defaultMessage,
+        'validation.is_not_date_after',
       );
     });
   });

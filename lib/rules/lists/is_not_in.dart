@@ -10,7 +10,7 @@ class IsNotIn extends TextXValidationRule {
   bool isValid(String input) => isNotIn(input, list);
 
   @override
-  String toString() => 'validation.must_not_be_in_list';
+  String get defaultMessage => 'validation.must_not_be_in_list';
 }
 
 /// check if `value` is `NOT` in `List`

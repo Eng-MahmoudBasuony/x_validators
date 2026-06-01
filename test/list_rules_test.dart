@@ -65,12 +65,16 @@ void main() {
       );
     });
 
-    // NOTE: the `caseSensitive` FIELD on ContainsAny is dead — isValid never
-    // forwards it, so the rule is always case-insensitive. Wiring it up is
-    // planned as a breaking change (v2).
-    test('the caseSensitive field has no effect (known dead field)', () {
-      final rule = ContainsAny(['WORLD'])..caseSensitive = true;
-      expect(rule.isValid('hello world'), isTrue);
+    // 2.0 wired up caseSensitive as a real constructor parameter: it now affects
+    // matching (it was a dead, @Deprecated field before).
+    test('the caseSensitive constructor flag is honored', () {
+      expect(
+        const ContainsAny([
+          'WORLD',
+        ], caseSensitive: true).isValid('hello world'),
+        isFalse,
+      );
+      expect(const ContainsAny(['WORLD']).isValid('hello world'), isTrue);
     });
   });
 

@@ -4,13 +4,18 @@ import '../../x_validators.dart';
 
 class ContainsAny extends TextXValidationRule {
   final List<String> value;
-  bool? caseSensitive;
-  ContainsAny(this.value, [String? error]) : super(error);
+
+  /// When `true`, matching is case-sensitive. Defaults to `false`.
+  final bool caseSensitive;
+
+  const ContainsAny(this.value, {this.caseSensitive = false, String? error})
+    : super(error);
 
   @override
-  bool isValid(String input) => containsAny(input, value);
+  bool isValid(String input) =>
+      containsAny(input, value, caseSensitive: caseSensitive);
   @override
-  String toString() => 'validation.must_contains_any';
+  String get defaultMessage => 'validation.must_contains_any';
 }
 
 /// Returns `true` if [v] contains any entry from [list] (case-insensitive by default).

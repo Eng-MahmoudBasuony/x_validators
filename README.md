@@ -33,6 +33,7 @@ that plug straight into any `TextFormField.validator`.
   - [Localizing error messages](#localizing-error-messages)
   - [Standalone helper functions](#standalone-helper-functions)
 - [Good to know](#-good-to-know)
+- [Migrating to 2.0.0](#-migrating-to-200)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -42,7 +43,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  x_validators: ^1.1.0
+  x_validators: ^2.0.0
 ```
 
 Then run `flutter pub get` (or `dart pub get`).
@@ -89,9 +90,11 @@ rules after (e.g. `IsEmail`).
 
 ## 📚 API reference
 
-All rules accept an optional positional `error` message as their **last**
-argument (e.g. `IsRequired('This field is required')`). When omitted, the rule's
-default message is used (see [Localizing error messages](#localizing-error-messages)).
+Most rules accept an optional positional `error` message as their **last**
+argument (e.g. `IsRequired('This field is required')`); a few (`Match`,
+`ContainsAny`) take it as a named `error` parameter alongside their other named
+options. When omitted, the rule's default message is used (see
+[Localizing error messages](#localizing-error-messages)).
 
 #### Text
 
@@ -111,7 +114,8 @@ default message is used (see [Localizing error messages](#localizing-error-messa
 
 | Rule | Description |
 |------|-------------|
-| `IsNumber([error])` | Input is a number. |
+| `IsNumber([error])` | Input is an integer (use `IsDecimal` for fractional values). |
+| `IsDecimal([error])` | Input is a decimal number (integers are accepted too). |
 | `IsArabicNum([error])` | Positive integer written in Latin digits `0-9` (no leading zero). |
 | `IsHindiNum([error])` | Number written in Arabic-Indic digits `٠-٩`. |
 | `MinValue(min, [error])` | Parsed numeric value is `>= min`. |
@@ -150,7 +154,7 @@ default message is used (see [Localizing error messages](#localizing-error-messa
 |------|-------------|
 | `IsIn(values, [error])` | Input is one of the values in the provided list. |
 | `IsNotIn(values, [error])` | Input is **not** in the provided list. |
-| `ContainsAny(values, [error])` | Input contains at least one item from the list. |
+| `ContainsAny(values, {caseSensitive = false, error})` | Input contains at least one item from the list (case-insensitive by default). |
 | `NotContainsAny(values, [error])` | Input contains none of the items in the list. |
 
 #### Dates
@@ -165,9 +169,9 @@ default message is used (see [Localizing error messages](#localizing-error-messa
 
 | Rule | Description |
 |------|-------------|
-| `IsArabicChars([error])` | Input consists of Arabic characters. |
+| `IsArabicChars([error])` | Input consists of Arabic letters, whitespace and Arabic-Indic digits `٠-٩`. |
 | `IsEnglishChars([error])` | Input consists of English (ASCII) characters. |
-| `IsNumbersOnly([error])` | Input contains digits. |
+| `IsNumbersOnly([error])` | Input is all digits (one or more). |
 | `IsLtrLanguage([error])` | Input is a left-to-right language code. |
 | `IsRTLLanguage([error])` | Input is a right-to-left language code. |
 
@@ -246,7 +250,7 @@ xValidator([
 ### Writing a custom rule
 
 Extend `TextXValidationRule`, implement `isValid`, and (optionally) override
-`toString()` to provide a default message:
+`defaultMessage` to provide a default message:
 
 ```dart
 class StartsWithCapital extends TextXValidationRule {
@@ -257,12 +261,15 @@ class StartsWithCapital extends TextXValidationRule {
       input.isNotEmpty && input[0] == input[0].toUpperCase();
 
   @override
-  String toString() => 'Must start with a capital letter';
+  String get defaultMessage => 'Must start with a capital letter';
 }
 
 // Use it like any built-in rule:
 xValidator([const StartsWithCapital()]);
 ```
+
+> Overriding `toString()` still works — the base `defaultMessage` delegates to it
+> — but `defaultMessage` is the preferred hook for a rule's default message.
 
 ### Localizing error messages
 
@@ -279,7 +286,7 @@ validate(''); // → 'هذا الحقل مطلوب'
 ```
 
 Resolution order for a failing rule is: **inline `error`** → **registered
-translator** → **`rule.toString()`**.
+translator** → **`rule.defaultMessage`**.
 
 ### Standalone helper functions
 
@@ -295,10 +302,58 @@ EmailXValidator.validate('test@example.com'); // true
 
 ## ℹ️ Good to know
 
-- A `null` value passed to the validator is currently treated as valid (it
-  short-circuits to `null`). In practice Flutter's `TextFormField` passes an
-  empty string `''` rather than `null`, which `IsRequired` rejects as expected.
-  Treating `null` as empty is planned for the next major release.
+- A `null` value passed to the validator is treated as an empty string `''`, so
+  `IsRequired` (and every other rule) sees `''` and a required field correctly
+  fails on `null`. Add an `IsOptional` rule if you want an empty/`null` value to
+  skip the remaining rules and pass. (Before 2.0.0, `null` short-circuited the
+  whole validator to "valid" — see [Migrating to 2.0.0](#-migrating-to-200).)
+
+## ⬆️ Migrating to 2.0.0
+
+2.0.0 is a behavior-only major release: the public API shape is unchanged (same
+rules, same `xValidator` signature), but several rules were tightened to do what
+their names promise. Most apps need no code changes — the table below lists every
+behavior change and how to restore the old behavior where it's recoverable.
+
+| Area | Before (1.x) | After (2.0.0) | How to adapt |
+|------|--------------|---------------|--------------|
+| `null` input | Short-circuited the whole validator to **valid** | Treated as `''`, so `IsRequired` **rejects** it | Add `IsOptional` to let empty/`null` pass |
+| `IsNumber` | Accepted decimals, hex, scientific (`3.14`, `1e3`, `0x1A`) | **Integers only** | Use the new `IsDecimal` for fractional values |
+| `IsArabicChars` | `\p{N}` token matched the literal chars `p{N}` and **no** digits | Accepts Arabic-Indic digits `٠-٩` only | — (this was a bug; Latin `123` was never really allowed) |
+| `IsNumbersOnly` | Passed if the input *contained* a digit (`'abc1'`, `'12 34'`) | Passes only when the input **is all digits** | Use `Contains`/`RegExpRule` for "contains a digit" |
+| `IsFacebookUrl` / `IsInstagramUrl` / `IsYoutubeUrl` | Unanchored — `facebook.com.evil.com` passed | Fully anchored — domain-suffix spoofing is rejected | — (intended hardening) |
+| `IsUrl` | Rejected hyphens, deep subdomains, long TLDs | Accepts `my-site.co.uk`, `a.b.example.com`, `example.museum` | — (relaxation only) |
+| `IsIpAddress` | Tolerated leading zeros and whitespace (`192.168.001.001`, `' 1.2.3.4'`) | Strict dotted-quad | Trim/normalize before validating if needed |
+| `ContainsAny` | `error` was positional; `caseSensitive` was a dead no-op | `error` is named; `caseSensitive` works | See snippet below |
+| `IsArabicNum` / `IsHindiNum` | Both used key `validation.must_be_num` | `validation.must_be_arabic_num` / `validation.must_be_hindi_num` | Re-key your translators (inline `error:` is unaffected) |
+| `isInstgramUrlValid` | Typo'd free function | Renamed to `isInstagramUrlValid` | Old name still works as a `@Deprecated` alias |
+
+### Decimals: `IsNumber` → `IsDecimal`
+
+```dart
+// 1.x — accepted "3.14"
+xValidator([const IsNumber()]);
+
+// 2.0.0 — integers only; use IsDecimal for fractional input
+xValidator([const IsDecimal()]);
+```
+
+### `ContainsAny`: `error` is now named, `caseSensitive` now works
+
+```dart
+// 1.x
+const ContainsAny(['a', 'b'], 'Pick one');          // positional error
+final r = ContainsAny(['a'])..caseSensitive = true; // dead no-op field
+
+// 2.0.0
+const ContainsAny(['a', 'b'], error: 'Pick one');   // named error
+const ContainsAny(['a'], caseSensitive: true);      // actually case-sensitive
+```
+
+> If you imported individual rule files directly, note two internal renames:
+> `text/is_not_empty.dart` → `text/is_required.dart` and
+> `urls/is_instgram_url.dart` → `urls/is_instagram_url.dart`. Importing the
+> package barrel (`package:x_validators/x_validators.dart`) needs no change.
 
 ## 🤝 Contributing
 

@@ -8,24 +8,27 @@ void main() {
       expect(const IsArabicChars().isValid('مرحبا أحمد'), isTrue);
     });
 
-    test('rejects Latin letters and digits', () {
+    test('accepts Arabic-Indic digits alongside letters', () {
+      expect(const IsArabicChars().isValid('١٢٣'), isTrue);
+      expect(const IsArabicChars().isValid('مرحبا ١٢٣'), isTrue);
+    });
+
+    test('rejects Latin letters and Latin digits', () {
       expect(const IsArabicChars().isValid('hello'), isFalse);
       expect(const IsArabicChars().isValid('a'), isFalse);
       expect(const IsArabicChars().isValid('123'), isFalse);
       expect(const IsArabicChars().isValid('مرحبا 123'), isFalse);
     });
 
-    // NOTE: the pattern is `^[ء-ي\s\p{N}]+$` WITHOUT the unicode flag,
-    // so `\p{N}` is not the Unicode "Number" property — it is parsed as the
-    // literal characters p, {, N and }. Those therefore validate as "Arabic",
-    // while real digits do not. Fixing the class (unicode flag) is planned as a
-    // breaking change (v2).
-    test('literal p { N } slip through the \\p{N} bug (known behavior)', () {
-      expect(const IsArabicChars().isValid('p'), isTrue);
-      expect(const IsArabicChars().isValid('{'), isTrue);
-      expect(const IsArabicChars().isValid('N'), isTrue);
-      expect(const IsArabicChars().isValid('}'), isTrue);
-      expect(const IsArabicChars().isValid('pN{}'), isTrue);
+    // Anchored in 2.0 to Arabic letters, whitespace and Arabic-Indic digits, so
+    // the literal characters p, {, N and } no longer validate (they did before,
+    // when `\p{N}` was parsed literally without the unicode flag).
+    test('literal p { N } are rejected', () {
+      expect(const IsArabicChars().isValid('p'), isFalse);
+      expect(const IsArabicChars().isValid('{'), isFalse);
+      expect(const IsArabicChars().isValid('N'), isFalse);
+      expect(const IsArabicChars().isValid('}'), isFalse);
+      expect(const IsArabicChars().isValid('pN{}'), isFalse);
     });
   });
 
@@ -51,17 +54,16 @@ void main() {
       expect(const IsNumbersOnly().isValid('0'), isTrue);
     });
 
-    test('rejects strings with no digit at all', () {
+    test('rejects strings that are not all digits', () {
       expect(const IsNumbersOnly().isValid('abc'), isFalse);
       expect(const IsNumbersOnly().isValid(''), isFalse);
     });
 
-    // NOTE: despite the name, the regex `[0-9]` is unanchored, so it really
-    // means "contains at least one digit". Anchoring to `^[0-9]+$` is planned
-    // as a breaking change (v2).
-    test('any input containing a digit currently matches (known behavior)', () {
-      expect(const IsNumbersOnly().isValid('abc123'), isTrue);
-      expect(const IsNumbersOnly().isValid('12 34'), isTrue);
+    // Anchored in 2.0 to `^[0-9]+$`: a digit somewhere in the string is no longer
+    // enough — the whole value must be digits.
+    test('mixed or spaced input is rejected', () {
+      expect(const IsNumbersOnly().isValid('abc123'), isFalse);
+      expect(const IsNumbersOnly().isValid('12 34'), isFalse);
     });
   });
 

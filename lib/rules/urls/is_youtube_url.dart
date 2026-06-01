@@ -8,10 +8,12 @@ class IsYoutubeUrl extends TextXValidationRule {
   bool isValid(String input) => isYoutubeUrLValid(input);
 
   @override
-  String toString() => 'not_valid_youtube_url';
+  String get defaultMessage => 'validation.is_not_youtube_url';
 }
 
+final _youtubeUrlRegExp = RegExp(
+  r'^https?:\/\/(www\.)?youtube\.com(\/[-a-zA-Z0-9()@:%_+.~#?&/=]*)?$',
+);
+
 /// Returns `true` if [url] is an http or https YouTube URL.
-bool isYoutubeUrLValid(String url) => RegExp(
-  r'^((https?):\/\/)((www\.)?(youtube)\.(com))\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)',
-).hasMatch(url);
+bool isYoutubeUrLValid(String url) => _youtubeUrlRegExp.hasMatch(url);

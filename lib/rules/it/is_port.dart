@@ -8,7 +8,7 @@ class IsPort extends TextXValidationRule {
   bool isValid(String input) => isPort(input);
 
   @override
-  String toString() => 'validation.is_notport';
+  String get defaultMessage => 'validation.is_not_port';
 }
 
 /// Returns `true` if [input] is an integer port in the range 0–65535.

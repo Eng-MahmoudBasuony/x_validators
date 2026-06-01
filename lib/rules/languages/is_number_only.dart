@@ -1,6 +1,6 @@
 import '../../x_validators.dart';
 
-/// Validates that the input contains at least one digit.
+/// Validates that the input is all digits (one or more, nothing else).
 class IsNumbersOnly extends TextXValidationRule {
   const IsNumbersOnly([super.error]);
 
@@ -8,8 +8,10 @@ class IsNumbersOnly extends TextXValidationRule {
   bool isValid(String input) => isNumbersOnly(input);
 
   @override
-  String toString() => 'validation.is_numbers_only';
+  String get defaultMessage => 'validation.is_numbers_only';
 }
 
-/// Returns `true` if [input] contains at least one digit.
-bool isNumbersOnly(String input) => RegExp('[0-9]').hasMatch(input);
+final _numbersOnlyRegExp = RegExp(r'^[0-9]+$');
+
+/// Returns `true` if [input] is one or more digits and nothing else.
+bool isNumbersOnly(String input) => _numbersOnlyRegExp.hasMatch(input);

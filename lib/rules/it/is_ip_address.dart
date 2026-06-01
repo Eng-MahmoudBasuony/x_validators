@@ -8,31 +8,15 @@ class IsIpAddress extends TextXValidationRule {
   bool isValid(String input) => isIpAddress(input);
 
   @override
-  String toString() => 'validation.is_ip_address';
+  String get defaultMessage => 'validation.is_ip_address';
 }
 
-/// Returns `true` if [input] is a string holding a dotted-quad IPv4 address.
-bool isIpAddress(Object? input) {
-  if (input == null || input is! String) {
-    return false;
-  } else {
-    final ipParts = input.split('.');
-    if (ipParts.length != 4) {
-      return false;
-    }
-    bool isValid = true;
-    for (final part in ipParts) {
-      try {
-        final int value = int.parse(part);
-        if (value < 0 || value > 255) {
-          isValid = false;
-          break;
-        }
-      } catch (e) {
-        isValid = false;
-        break;
-      }
-    }
-    return isValid;
-  }
-}
+final _ipv4RegExp = RegExp(
+  r'^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}'
+  r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$',
+);
+
+/// Returns `true` if [input] is a string holding a strict dotted-quad IPv4
+/// address — no leading zeros, signs or surrounding/embedded whitespace.
+bool isIpAddress(Object? input) =>
+    input is String && _ipv4RegExp.hasMatch(input);

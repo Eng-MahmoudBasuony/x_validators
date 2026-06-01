@@ -23,22 +23,35 @@ void main() {
       expect(isNumber(null), isFalse);
     });
 
-    // NOTE: despite the name, the rule is backed by num.tryParse, so it accepts
-    // far more than integers: decimals, scientific notation, hex, and even the
-    // special values NaN/Infinity. Narrowing this to int.tryParse is planned as
-    // a breaking change (v2).
-    test(
-      'also accepts decimals, hex, scientific and specials (known behavior)',
-      () {
-        expect(const IsNumber().isValid('3.14'), isTrue);
-        expect(const IsNumber().isValid('.5'), isTrue);
-        expect(const IsNumber().isValid('5.'), isTrue);
-        expect(const IsNumber().isValid('1e3'), isTrue);
-        expect(const IsNumber().isValid('0x1A'), isTrue);
-        expect(const IsNumber().isValid('NaN'), isTrue);
-        expect(const IsNumber().isValid('Infinity'), isTrue);
-      },
-    );
+    // 2.0 narrowed this from num.tryParse to int.tryParse, so non-integers that
+    // used to pass are now rejected. Use IsDecimal for fractional values.
+    test('rejects decimals, hex, scientific and specials', () {
+      expect(const IsNumber().isValid('3.14'), isFalse);
+      expect(const IsNumber().isValid('.5'), isFalse);
+      expect(const IsNumber().isValid('5.'), isFalse);
+      expect(const IsNumber().isValid('1e3'), isFalse);
+      expect(const IsNumber().isValid('0x1A'), isFalse);
+      expect(const IsNumber().isValid('NaN'), isFalse);
+      expect(const IsNumber().isValid('Infinity'), isFalse);
+    });
+  });
+
+  group('IsDecimal / isDecimal', () {
+    test('accepts integers and decimals, signed', () {
+      expect(const IsDecimal().isValid('5'), isTrue);
+      expect(const IsDecimal().isValid('3.14'), isTrue);
+      expect(const IsDecimal().isValid('-2.5'), isTrue);
+      expect(const IsDecimal().isValid('.5'), isTrue);
+      expect(const IsDecimal().isValid('1e3'), isTrue);
+      expect(const IsDecimal().isValid(' 5 '), isTrue);
+    });
+
+    test('rejects non-numeric input', () {
+      expect(const IsDecimal().isValid('abc'), isFalse);
+      expect(const IsDecimal().isValid(''), isFalse);
+      expect(const IsDecimal().isValid('1.2.3'), isFalse);
+      expect(isDecimal(null), isFalse);
+    });
   });
 
   group(

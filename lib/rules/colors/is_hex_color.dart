@@ -9,12 +9,14 @@ class IsHexColor extends TextXValidationRule {
   bool isValid(String input) => isHexColor(input);
 
   @override
-  String toString() => 'must be hex color';
+  String get defaultMessage => 'validation.is_not_hex_color';
 }
+
+final _hexColorRegExp = RegExp(
+  r'^#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$',
+);
 
 /// can starts with or without`#`
 /// must contains
 bool isHexColor(String? input) =>
-    input != null &&
-    (RegExp(r'^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').hasMatch(input) ||
-        RegExp(r'^#?([A-Fa-f0-9]{8}|[A-Fa-f0-9]{3})$').hasMatch(input));
+    input != null && _hexColorRegExp.hasMatch(input);

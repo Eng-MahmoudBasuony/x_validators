@@ -10,5 +10,5 @@ class StartsWith extends TextXValidationRule {
   bool isValid(String input) => input.trim().startsWith(pattern);
 
   @override
-  String toString() => 'validation.starts_with';
+  String get defaultMessage => 'validation.starts_with';
 }

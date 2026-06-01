@@ -1,6 +1,6 @@
 name: x_validators
 description: Simple, composable, zero-dependency form and text validation for Dart and Flutter. Stack rules and plug straight into TextFormField.
-version: 1.2.0
+version: 2.0.0
 homepage: https://github.com/Eng-MahmoudBasuony/x_validators
 repository: https://github.com/Eng-MahmoudBasuony/x_validators
 issue_tracker: https://github.com/Eng-MahmoudBasuony/x_validators/issues

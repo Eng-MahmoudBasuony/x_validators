@@ -7,7 +7,7 @@ class IsEmail extends TextXValidationRule {
   @override
   bool isValid(String input) => isEmail(input);
   @override
-  String toString() => 'validation.is_not_email_address';
+  String get defaultMessage => 'validation.is_not_email_address';
 }
 
 /// checks if the value can be well formatted email address

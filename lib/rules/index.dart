@@ -32,6 +32,7 @@ export 'lists/not_contains_any.dart';
 export 'magic/is_optional.dart';
 export 'numbers/is_arabic_num.dart';
 // * Exporting number-related validators
+export 'numbers/is_decimal.dart';
 export 'numbers/is_hindi_num.dart';
 export 'numbers/is_number.dart';
 export 'numbers/max_value.dart';
@@ -43,7 +44,7 @@ export 'phone/is_ksa_number.dart';
 export 'text/contains.dart';
 export 'text/ends_with.dart';
 export 'text/is_empty.dart';
-export 'text/is_not_empty.dart';
+export 'text/is_required.dart';
 export 'text/match.dart';
 export 'text/max_length.dart';
 export 'text/min_length.dart';
@@ -51,7 +52,7 @@ export 'text/not_contains.dart';
 export 'text/starts_with.dart';
 // * Exporting URL-related validators
 export 'urls/is_facebook_url.dart';
-export 'urls/is_instgram_url.dart';
+export 'urls/is_instagram_url.dart';
 export 'urls/is_secure_url.dart';
 export 'urls/is_url.dart';
 export 'urls/is_youtube_url.dart';

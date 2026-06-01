@@ -6,10 +6,10 @@ abstract class XValidatorsLocalization {
   static final _map = <String, String Function(TextXValidationRule)>{};
 
   /// Translates a TextXValidationRule into a localized error message using the registered translation function.
-  /// If no translation function is registered for a specific rule type, it falls back to the default toString() representation.
+  /// If no translation function is registered for a specific rule type, it falls back to the rule's [defaultMessage].
   static String translate(TextXValidationRule rule) =>
       _map[rule.runtimeType.toString()] == null
-      ? rule.toString()
+      ? rule.defaultMessage
       : _map[rule.runtimeType.toString()]!(rule);
 
   /// Registers a translation function for a specific TextXValidationRule type.

@@ -10,5 +10,5 @@ class Contains extends TextXValidationRule {
   @override
   bool isValid(String input) => input.trim().contains(value);
   @override
-  String toString() => 'validation.is_it_contains';
+  String get defaultMessage => 'validation.is_it_contains';
 }

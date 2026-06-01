@@ -8,8 +8,10 @@ class IsEnglishChars extends TextXValidationRule {
   bool isValid(String input) => isEnglishChars(input);
 
   @override
-  String toString() => 'validation.is_english_chars';
+  String get defaultMessage => 'validation.is_english_chars';
 }
 
+final _englishCharsRegExp = RegExp(r'^[a-zA-Z]+$');
+
 /// Returns `true` if [input] consists of English letters only.
-bool isEnglishChars(String input) => RegExp(r'^[a-zA-Z]+$').hasMatch(input);
+bool isEnglishChars(String input) => _englishCharsRegExp.hasMatch(input);

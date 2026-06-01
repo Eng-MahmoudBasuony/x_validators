@@ -9,5 +9,5 @@ class MaxLength extends TextXValidationRule {
   @override
   bool isValid(String input) => input.trim().length <= max;
   @override
-  String toString() => 'validation.max length is $max';
+  String get defaultMessage => 'validation.max_length';
 }

@@ -8,27 +8,53 @@ enum SubdomainType { None, Alphabetic, Numeric, AlphaNumeric }
 
 ///The EmailValidator entry point
 ///
-/// To use the EmailValidator class, call EmailValidator.methodName
+/// To use the EmailValidator class, call EmailXValidator.validate. Each call
+/// runs on a fresh [_EmailParser], so no parser state is shared between calls.
 class EmailXValidator {
-  static int _index = 0;
+  /// Validate the specified email address.
+  ///
+  /// If [allowTopLevelDomains] is `true`, then the validator will
+  /// allow addresses with top-level domains like `email@example`.
+  ///
+  /// If [allowInternational] is `true`, then the validator
+  /// will use the newer International Email standards for validating
+  /// the email address.
+  static bool validate(
+    String email, [
+    bool allowTopLevelDomains = false,
+    bool allowInternational = true,
+  ]) {
+    return _EmailParser().validate(
+      email,
+      allowTopLevelDomains,
+      allowInternational,
+    );
+  }
+}
+
+/// A single-use, cursor-based parser for one email address. The mutable parse
+/// state ([_index] and [_domainType]) lives on the instance, so concurrent or
+/// repeated validations can never interfere with one another.
+class _EmailParser {
+  int _index = 0;
 
   static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
-  static SubdomainType _domainType = SubdomainType.None;
+  SubdomainType _domainType = SubdomainType.None;
 
-  static bool _isDigit(String c) {
+  bool _isDigit(String c) {
     return c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57;
   }
 
-  static bool _isLetter(String c) {
+  bool _isLetter(String c) {
     return (c.codeUnitAt(0) >= 65 && c.codeUnitAt(0) <= 90) ||
         (c.codeUnitAt(0) >= 97 && c.codeUnitAt(0) <= 122);
   }
 
-  static bool _isLetterOrDigit(String c) {
+  bool _isLetterOrDigit(String c) {
     return _isLetter(c) || _isDigit(c);
   }
 
-  static bool _isAtom(String c, bool allowInternational) {
+  bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.contains(c)
         : allowInternational;
@@ -47,7 +73,7 @@ class EmailXValidator {
   // The value of allowInternational is checked where, if true,
   // domainType is set to Alphabetic and the function returns true
   // Otherwise, the function returns false
-  static bool _isDomain(String c, bool allowInternational) {
+  bool _isDomain(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c) || c == '-') {
         _domainType = SubdomainType.Alphabetic;
@@ -72,7 +98,7 @@ class EmailXValidator {
 
   // Returns true if domainType is not None
   // Otherwise returns false
-  static bool _isDomainStart(String c, bool allowInternational) {
+  bool _isDomainStart(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c)) {
         _domainType = SubdomainType.Alphabetic;
@@ -99,7 +125,7 @@ class EmailXValidator {
     return false;
   }
 
-  static bool _skipAtom(String text, bool allowInternational) {
+  bool _skipAtom(String text, bool allowInternational) {
     final startIndex = _index;
 
     while (_index < text.length && _isAtom(text[_index], allowInternational)) {
@@ -111,7 +137,7 @@ class EmailXValidator {
 
   // Skips checking of subdomain and returns false if domainType is None
   // Otherwise returns true
-  static bool _skipSubDomain(String text, bool allowInternational) {
+  bool _skipSubDomain(String text, bool allowInternational) {
     final startIndex = _index;
 
     if (!_isDomainStart(text[_index], allowInternational)) {
@@ -130,7 +156,7 @@ class EmailXValidator {
 
   // Skips checking of domain if domainType is numeric and returns false
   // Otherwise, return true
-  static bool _skipDomain(
+  bool _skipDomain(
     String text,
     bool allowTopLevelDomains,
     bool allowInternational,
@@ -167,7 +193,7 @@ class EmailXValidator {
   // Function skips over quoted text where if quoted text is in the string
   // the function returns true
   // otherwise the function returns false
-  static bool _skipQuoted(String text, bool allowInternational) {
+  bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
     // skip over leading '"'
@@ -201,7 +227,7 @@ class EmailXValidator {
   }
 
   // TODO: Documentation for this function is required
-  static bool _skipIPv4Literal(String text) {
+  bool _skipIPv4Literal(String text) {
     var groups = 0;
 
     while (_index < text.length && groups < 4) {
@@ -229,7 +255,7 @@ class EmailXValidator {
     return groups == 4;
   }
 
-  static bool _isHexDigit(String str) {
+  bool _isHexDigit(String str) {
     final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
         (c >= 97 && c <= 102) ||
@@ -251,7 +277,7 @@ class EmailXValidator {
   //             ; The "::" represents at least 2 16-bit groups of zeros
   //             ; No more than 4 groups in addition to the "::" and
   //             ; IPv4-address-literal may be present
-  static bool _skipIPv6Literal(String text) {
+  bool _skipIPv6Literal(String text) {
     var compact = false;
     var colons = 0;
 
@@ -315,19 +341,13 @@ class EmailXValidator {
     return compact ? colons < 7 : colons == 7;
   }
 
-  /// Validate the specified email address.
-  ///
-  /// If [allowTopLevelDomains] is `true`, then the validator will
-  /// allow addresses with top-level domains like `email@example`.
-  ///
-  /// If [allowInternational] is `true`, then the validator
-  /// will use the newer International Email standards for validating
-  /// the email address.
-  static bool validate(
-    String email, [
-    bool allowTopLevelDomains = false,
-    bool allowInternational = true,
-  ]) {
+  /// Parses [email] end-to-end, returning `true` only if the whole string is a
+  /// valid address. See [EmailXValidator.validate] for the flag semantics.
+  bool validate(
+    String email,
+    bool allowTopLevelDomains,
+    bool allowInternational,
+  ) {
     _index = 0;
 
     if (email.isEmpty || email.length >= 255) {

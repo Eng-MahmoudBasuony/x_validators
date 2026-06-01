@@ -1,6 +1,7 @@
 import '../../x_validators.dart';
 
-/// Validates that the input contains only Arabic letters and whitespace.
+/// Validates that the input contains only Arabic letters, whitespace and
+/// Arabic-Indic digits (٠-٩).
 class IsArabicChars extends TextXValidationRule {
   const IsArabicChars([super.error]);
 
@@ -8,9 +9,11 @@ class IsArabicChars extends TextXValidationRule {
   bool isValid(String input) => isArabicChars(input);
 
   @override
-  String toString() => 'validation.is_arabic_chars';
+  String get defaultMessage => 'validation.is_arabic_chars';
 }
 
-/// Returns `true` if [input] consists of Arabic letters and whitespace.
-bool isArabicChars(String input) =>
-    RegExp(r'^[\u0621-\u064A\s\p{N}]+$').hasMatch(input);
+final _arabicCharsRegExp = RegExp(r'^[\u0621-\u064A\s\u0660-\u0669]+$');
+
+/// Returns `true` if [input] consists of Arabic letters, whitespace and
+/// Arabic-Indic digits (٠-٩).
+bool isArabicChars(String input) => _arabicCharsRegExp.hasMatch(input);

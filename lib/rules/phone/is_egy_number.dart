@@ -7,12 +7,10 @@ class IsEgyptianPhone extends TextXValidationRule {
   @override
   bool isValid(String input) => isEgyptianNumber(input);
   @override
-  String toString() => 'validation.is_egyptian_num';
+  String get defaultMessage => 'validation.is_egyptian_num';
 }
+
+final _egyptianPhoneRegExp = RegExp(r'^01[0125][0-9]{8}$');
 
 /// Returns `true` if [str] is a valid Egyptian mobile number.
-bool isEgyptianNumber(String str) {
-  final phoneRegX = RegExp('^01[0125][0-9]{8}\$');
-
-  return phoneRegX.hasMatch(str);
-}
+bool isEgyptianNumber(String str) => _egyptianPhoneRegExp.hasMatch(str);

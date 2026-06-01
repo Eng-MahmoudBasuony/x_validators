@@ -10,5 +10,5 @@ class EndsWith extends TextXValidationRule {
   bool isValid(String input) => input.trim().endsWith(end);
 
   @override
-  String toString() => 'validation.must_end_with';
+  String get defaultMessage => 'validation.must_end_with';
 }

@@ -8,7 +8,7 @@ class NotContainsAny extends TextXValidationRule {
   const NotContainsAny(this.value, [String? error]) : super(error);
 
   @override
-  String toString() => 'validation.must_not_contains_any';
+  String get defaultMessage => 'validation.must_not_contains_any';
 
   @override
   bool isValid(String input) => notContainsAny(input, value);

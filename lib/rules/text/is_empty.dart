@@ -7,7 +7,7 @@ class IsEmpty extends TextXValidationRule {
   @override
   bool isValid(String input) => isEmpty(input);
   @override
-  String toString() => 'validation.is_empty';
+  String get defaultMessage => 'validation.is_empty';
 }
 
 /// `trim` the string then checks if `isEmpty`

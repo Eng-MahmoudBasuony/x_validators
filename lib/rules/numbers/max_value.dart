@@ -9,7 +9,7 @@ class MaxValue extends TextXValidationRule {
   @override
   bool isValid(String input) => maxValue(input, max);
   @override
-  String toString() => 'validation.must_be_max';
+  String get defaultMessage => 'validation.must_be_max';
 }
 
 /// Returns `true` if [value] parses to a number less than or equal to [max].
@@ -18,10 +18,6 @@ bool maxValue(Object? value, num max) {
   if (value is String) {
     val = num.tryParse(value);
   } else if (value is num) {
-    val = value;
-  } else if (value is int) {
-    val = value;
-  } else if (value is double) {
     val = value;
   }
   return val != null && val <= max;

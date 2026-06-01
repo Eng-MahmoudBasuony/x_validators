@@ -7,11 +7,13 @@ class IsHindiNum extends TextXValidationRule {
   @override
   bool isValid(String input) => isHindiNum(input);
   @override
-  String toString() => 'validation.must_be_num';
+  String get defaultMessage => 'validation.must_be_hindi_num';
 }
+
+final _hindiNumRegExp = RegExp('^[١-٩][٠-٩]*\$');
 
 /// Returns `true` if [input] is a positive integer in Arabic-Indic digits with no leading zero.
 bool isHindiNum(String input) {
   //ToDo if it's starts with ٠ , i.e ٠٢٣٤٥٦٧ it's not a valid number
-  return RegExp('^[\u0661-\u0669][\u0660-\u0669]*\$').hasMatch(input);
+  return _hindiNumRegExp.hasMatch(input);
 }

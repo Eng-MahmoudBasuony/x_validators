@@ -11,5 +11,5 @@ class IsRTLLanguage extends TextXValidationRule {
 
   // Override toString method to provide a description for the rule
   @override
-  String toString() => 'validation.is_not_rtl_language_code';
+  String get defaultMessage => 'validation.is_not_rtl_language_code';
 }

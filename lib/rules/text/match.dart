@@ -14,13 +14,8 @@ class Match extends TextXValidationRule {
       : match(input.toLowerCase(), other.toLowerCase());
 
   @override
-  String toString() => 'validation.should_match';
+  String get defaultMessage => 'validation.should_match';
 }
 
 /// checks if two `Strings` are the same
-bool match(Object? input, Object? other) =>
-    input != null &&
-        other != null &&
-        input.runtimeType == other.runtimeType &&
-        identical(input, other) ||
-    input == other;
+bool match(Object? input, Object? other) => input == other;

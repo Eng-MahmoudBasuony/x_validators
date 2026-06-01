@@ -11,5 +11,5 @@ class NotContains extends TextXValidationRule {
   bool isValid(String input) => !input.trim().contains(value);
 
   @override
-  String toString() => 'validation.not_contains';
+  String get defaultMessage => 'validation.not_contains';
 }

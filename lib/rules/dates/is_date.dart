@@ -8,7 +8,7 @@ class IsDate extends TextXValidationRule {
   bool isValid(String input) => isDate(input);
 
   @override
-  String toString() => 'validation.is_not_date_format';
+  String get defaultMessage => 'validation.is_not_date_format';
 }
 
 /// checks if the input is a valid `date` to parse by Dart `DateTime` class

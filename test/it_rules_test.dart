@@ -91,18 +91,14 @@ void main() {
       expect(isIpAddress(123), isFalse);
     });
 
-    // NOTE: octets are validated with int.parse, which tolerates leading zeros
-    // and surrounding whitespace. So these "loose" forms currently pass.
-    // Tightening to a strict dotted-quad regex is planned as a breaking change (v2).
-    test(
-      'tolerates leading zeros and whitespace around octets (known behavior)',
-      () {
-        expect(const IsIpAddress().isValid('192.168.001.001'), isTrue);
-        expect(const IsIpAddress().isValid(' 192.168.1.1'), isTrue);
-        expect(const IsIpAddress().isValid('192.168.1.1 '), isTrue);
-        expect(const IsIpAddress().isValid('1 . 2 . 3 . 4'), isTrue);
-      },
-    );
+    // 2.0 tightened octets to a strict dotted-quad regex: leading zeros, signs
+    // and surrounding/embedded whitespace are now rejected.
+    test('rejects leading zeros and whitespace around octets', () {
+      expect(const IsIpAddress().isValid('192.168.001.001'), isFalse);
+      expect(const IsIpAddress().isValid(' 192.168.1.1'), isFalse);
+      expect(const IsIpAddress().isValid('192.168.1.1 '), isFalse);
+      expect(const IsIpAddress().isValid('1 . 2 . 3 . 4'), isFalse);
+    });
   });
 
   group('RegExpRule', () {

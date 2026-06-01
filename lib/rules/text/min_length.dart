@@ -13,7 +13,7 @@ class MinLength extends TextXValidationRule {
   }
 
   @override
-  String toString() => 'validation.min length is $min';
+  String get defaultMessage => 'validation.min_length';
 }
 
 /// Returns `true` if [input], trimmed, is at least [min] characters long.

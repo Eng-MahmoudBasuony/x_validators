@@ -28,13 +28,13 @@ void main() {
 
     test('returns the first failing rule message (order matters)', () {
       final validate = xValidator([const IsRequired(), const MinLength(5)]);
-      expect(validate('abc'), 'validation.min length is 5');
+      expect(validate('abc'), 'validation.min_length');
     });
 
     test('keeps validating until the first failure', () {
       // First rule passes, second fails -> second message is returned.
       final validate = xValidator([const MinLength(2), const MaxLength(3)]);
-      expect(validate('abcd'), 'validation.max length is 3');
+      expect(validate('abcd'), 'validation.max_length');
     });
 
     test('a custom error message takes precedence over the default', () {
@@ -42,9 +42,9 @@ void main() {
       expect(validate(''), 'Field is required');
     });
 
-    test('falls back to the rule toString() when no error is provided', () {
+    test('falls back to the rule defaultMessage when no error is provided', () {
       final validate = xValidator([const MinLength(5)]);
-      expect(validate('ab'), 'validation.min length is 5');
+      expect(validate('ab'), 'validation.min_length');
     });
 
     test('supports user-defined rules', () {
@@ -68,6 +68,27 @@ void main() {
         final validate = xValidator([const IsOptional(), const IsEmail()]);
         expect(validate('not-an-email'), isNotNull);
         expect(validate('user@example.com'), isNull);
+      });
+
+      // Regression guard: optionality is resolved by an up-front scan, so it no
+      // longer depends on where IsOptional sits in the list. Before the fix, an
+      // empty value with IsOptional placed last would wrongly fail the earlier
+      // rule.
+      test('is honored no matter where it sits in the list', () {
+        // Empty value passes whether IsOptional is last...
+        expect(xValidator([const IsEmail(), const IsOptional()])(''), isNull);
+        // ...or sandwiched in the middle.
+        expect(
+          xValidator([const MinLength(3), const IsOptional(), const IsEmail()])(
+            '',
+          ),
+          isNull,
+        );
+        // A non-empty invalid value still fails with IsOptional placed last.
+        expect(
+          xValidator([const IsEmail(), const IsOptional()])('not-an-email'),
+          isNotNull,
+        );
       });
     });
 
@@ -103,12 +124,11 @@ void main() {
       expect(called, isFalse);
     });
 
-    // NOTE: a null input currently short-circuits to "valid", so IsRequired
-    // does not catch null. TextFormField passes '' in practice. Treating null
-    // as empty is planned as a breaking change (v2).
-    test('null input is treated as valid today (known behavior)', () {
+    // A null input is treated as empty, so IsRequired now catches it. This
+    // flipped in 2.0: before, a null short-circuited the validator to "valid".
+    test('null input is treated as empty and fails IsRequired', () {
       final validate = xValidator([const IsRequired()]);
-      expect(validate(null), isNull);
+      expect(validate(null), 'validation.is_required');
     });
   });
 
