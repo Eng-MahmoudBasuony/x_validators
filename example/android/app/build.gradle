@@ -27,6 +27,13 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
+    // Workaround for AGP stripDebugSymbols failing on libflutter.so with NDK 28+.
+    packaging {
+        jniLibs {
+            keepDebugSymbols.add('**/libflutter.so')
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

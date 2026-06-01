@@ -17,7 +17,16 @@
       "Bash(awk ' *)",
       "Bash(flutter --version)",
       "Bash(flutter pub *)",
-      "Bash(flutter analyze *)"
+      "Bash(flutter analyze *)",
+      "Read(//Applications/Android Studio.app/Contents/jbr/Contents/Home/**)",
+      "Bash(\"/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java\" -version)",
+      "Bash(/usr/libexec/java_home -V)",
+      "Bash(flutter clean *)",
+      "Bash(flutter build *)",
+      "Bash(awk '{print $2, $11, $12, $13}')",
+      "Read(//Users/basuony/Library/Android/sdk/ndk/**)",
+      "Read(//Users/basuony/flutter/packages/flutter_tools/gradle/**)",
+      "Bash(echo \"=== actual flutter ndkVersion constant \\(gradle_utils.dart\\) ===\" ; grep -rsnE \"ndkVersion\\\\s*=|const String ndkVersion|ndkVersion ='|ndkVersion =\\\\\"\" ~/flutter/packages/flutter_tools/lib/src/android/gradle_utils.dart 2>/dev/null | head ; echo ; echo \"=== broader search ===\" ; grep -rsn \"11579264\\\\|12077973\\\\|13676358\\\\|14033849\" ~/flutter/packages/flutter_tools/lib/src/android/gradle_utils.dart 2>/dev/null | head)"
     ]
   }
 }
